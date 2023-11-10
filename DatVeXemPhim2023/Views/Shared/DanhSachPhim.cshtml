@@ -1,0 +1,19 @@
+﻿@model TPhim
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<div class="col-md-4">
+    <div class="card movie-item" style="width:300px">
+        <img class="card-img-top img-movie" src="~/LayoutDatVe/phim/@Model.HinhAnh" alt="Card image" style="width:100%">
+        <div class="card-body">
+            <h4 class="card-title"></h4>
+            <p class="card-text"></p>
+            <a asp-controller="home" asp-action="chitietphim" asp-route-IdPhim="@Model.Idphim" class="btn btn-outline-warning" style="margin-right:70px">Chi tiết</a>
+            <div>
+                <div test="">
+                    <a href="" class=""><button class="btn btn-outline-danger btn-buy-ticket-not-signed-in">Mua vé</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

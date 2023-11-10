@@ -1,0 +1,440 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CGV Cinemas VietNam | Thông tin - Lịch chiếu - Hệ thống rạp chiếu phim đẳng cấp CGV Cinemas Việt Nam</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/032571eeb1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/LayoutDatVe/css/index.css">
+    <link rel="stylesheet" href="~/LayoutDatVe/css/all.css">
+    <link rel="stylesheet" href="~/LayoutDatVe/css/listEvent.css">
+    <link rel="stylesheet" href="~/LayoutDatVe/css/listMovies.css">
+    <link rel="stylesheet" href="~/LayoutDatVe/css/listTheater.css">
+    <link rel="stylesheet" href="~/LayoutDatVe/css/main.css">
+    <link rel="stylesheet" href="~/LayoutDatVe/css/movieD.css">
+    <link rel="stylesheet" href="~/LayoutDatVe/css/newsD.css">
+    <link rel="stylesheet" href="~/LayoutDatVe/css/user.css">
+    <link rel="stylesheet" href="~/LayoutDatVe/css/newDetail.css">
+    <link rel="stylesheet" href="~/LayoutDatVe/css/slide.css">
+    <style>
+        /* carousel */
+        /* Make the image fully responsive */
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .img-movie {
+            height: 400px;
+        }
+
+        .movie-item {
+            margin-bottom: 50px;
+        }
+
+        button.search-btn, input {
+            font: 1em Hind, sans-serif;
+            line-height: 1.5em;
+        }
+        input {
+            color: #171717;
+        }
+        .search-bar {
+            display: flex;
+        }
+
+        .search-bar input,
+        .search-btn,
+        .search-btn:before,
+        .search-btn:after {
+            transition: all 0.25s ease-out;
+        }
+        .search-bar input,
+        .search-btn {
+            width: 3em;
+            height: 3em;
+        }
+        .search-bar input:invalid:not(:focus),
+        .search-btn {
+            cursor: pointer;
+        }
+        .search-bar,
+        .search-bar input:focus,
+        .search-bar input:valid  {
+            width: 100%;
+        }
+        .search-bar input:focus,
+        .search-bar input:not(:focus) + .search-btn:focus {
+            outline: transparent;
+        }
+        .search-bar {
+            padding-bottom: 1.5em;
+            justify-content: center;
+            max-width: 30em;
+        }
+        .search-bar input {
+            background: transparent;
+            border-radius: 1.5em;
+            box-shadow: 0 0 0 0.4em #171717 inset;
+            padding: 0.75em;
+            transform: translate(0.5em,0.5em) scale(0.5);
+            transform-origin: 100% 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        .search-bar input::-webkit-search-decoration {
+            -webkit-appearance: none;
+        }
+        .search-bar input:focus,
+        .search-bar input:valid {
+            background: #fff;
+            border-radius: 0.375em 0 0 0.375em;
+            box-shadow: 0 0 0 0.1em #d9d9d9 inset;
+            transform: scale(1);
+        }
+        .search-btn {
+            background: #171717;
+            border-radius: 0 0.75em 0.75em 0 / 0 1.5em 1.5em 0;
+            padding: 0.75em;
+            position: relative;
+            transform: translate(0.25em,0.25em) rotate(45deg) scale(0.25,0.125);
+            transform-origin: 0 50%;
+        }
+        .search-btn:before,
+        .search-btn:after {
+            content: "";
+            display: block;
+            opacity: 0;
+            position: absolute;
+        }
+        .search-btn:before {
+            border-radius: 50%;
+            box-shadow: 0 0 0 0.2em #f1f1f1 inset;
+            top: 0.75em;
+            left: 0.75em;
+            width: 1.2em;
+            height: 1.2em;
+        }
+        .search-btn:after {
+            background: #f1f1f1;
+            border-radius: 0 0.25em 0.25em 0;
+            top: 51%;
+            left: 51%;
+            width: 0.75em;
+            height: 0.25em;
+            transform: translate(0.2em,0) rotate(45deg);
+            transform-origin: 0 50%;
+        }
+        .search-btn span {
+            display: inline-block;
+            overflow: hidden;
+            width: 1px;
+            height: 1px;
+        }
+
+        /* Active state */
+        .search-bar input:focus + .search-btn,
+        .search-bar input:valid + .search-btn {
+            background: #008cff;
+            border-radius: 0 0.375em 0.375em 0;
+            transform: scale(1);
+        }
+        .search-bar input:focus + .search-btn:before,
+        .search-bar input:focus + .search-btn:after,
+        .search-bar input:valid + .search-btn:before,
+        .search-bar input:valid + .search-btn:after {
+            opacity: 1;
+        }
+        .search-bar input:focus + .search-btn:hover,
+        .search-bar input:valid + .search-btn:hover,
+        .search-bar input:valid:not(:focus) + .search-btn:focus {
+            background: #0c48db;
+        }
+        .search-bar input:focus + .search-btn:active,
+        .search-bar input:valid + .search-btn:active {
+            transform: translateY(1px);
+        }
+
+    </style>
+</head>
+<body>
+<!-- header -->
+    <div class="header">
+        <div class="header-content container">
+            <a class="header-content-logo" href="trangchu.html">
+                <img src="~/LayoutDatVe/img/cgvlogo.png" alt="">
+            </a>
+            <ul class="header-content-menu">
+                <a href="">PHIM</a>
+                <a href="">RẠP CGV</a>
+                <a href="">THÀNH VIÊN</a>
+                <a href="">CULTUREPLEX</a>
+                <a href="">CULTUREPLEX</a>
+                <a href="">ĐĂNG XUẤT</a>
+                <a href="">
+                    <img src="~/LayoutDatVe/img/kenhcine.gif" alt="">
+                </a>
+            </ul>
+            <a class="header-content-buy" href="booking.html">
+                <img src="~/LayoutDatVe/img/mua-ve_ngay.png" alt="">
+            </a>
+        </div>
+    </div>
+    <!-- End Header -->
+    <!-- MenuBar Responsive -->
+    <div class="menu-res container">
+        <div class="row">
+            <nav class="navbar navbar-dark ">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"> </span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">PHIM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">RẠP CGV</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">THÀNH VIÊN</a>
+                    </li>    
+                    <li class="nav-item">
+                        <a class="nav-link" href="">TIN MỚI & ƯU ĐÃI</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Đăng Xuất</a>
+                    </li> 
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="carousel-inner">
+            <div items="" var="movie" varStatus="count">
+                <div>
+                    <div test="">
+                        <div class="carousel-item active">
+                            <img src="~/LayoutDatVe/img/CGV.jpg"
+                                 alt="Los Angeles" width="1100" height="500">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <!-- movie selections-->
+
+    
+        @RenderBody()
+    
+</div>
+
+    <!-- end of movie selections -->
+</div>
+    <div class="top-scroll" style="font-size: 50px; text-align: right;"><a href="#">&#9650;</a></div>
+
+    <!-- End MenuBar Responsive-->
+    <!-- MenuBar -->
+    <!--header-->
+    <!--home-->
+    <div class="content container">
+        <div class="content-movie">
+            <div class="content-movie-title">
+                <h2>MOVIE SELECTION</h2>
+            </div>
+        </div>
+    </div>
+    <div class="feature">
+            <div class="feature-inner">
+                <div class="slideshow-container">
+                    <div class="mySlides fade">
+                        <a><img src="~/LayoutDatVe/img/MLOVER.jpg"></a>
+                    </div>
+
+                    <div class="mySlides fade">
+                        <a><img src="~/LayoutDatVe/img/ipman.jpg"></a>
+
+                    </div>
+                    <div class="mySlides fade">
+                        <a><img src="~/LayoutDatVe/img/endgame.jpg"></a>
+                    </div>
+
+                    <div class="mySlides fade">
+                        <a><img src="~/LayoutDatVe/img/xGMgspge6uYoypRiasAmlluDlXH.jpg"></a>
+                    </div>
+
+                    <div class="mySlides fade">
+                        <a><img src="~/LayoutDatVe/img/khu vườn ngôn từ.jpg"></a>
+                    </div>
+                </div>
+                <br>
+
+                <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                    <span class="dot" onclick="currentSlide(4)"></span>
+                </div>
+            </div>
+
+
+            <script>
+                var slideIndex;
+
+                function showSlides() {
+                    var i;
+                    var slides = document.getElementsByClassName("mySlides");
+                    var dots = document.getElementsByClassName("dot");
+                    for (i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";
+                    }
+                    for (i = 0; i < dots.length; i++) {
+                        dots[i].className = dots[i].className.replace(" active", "");
+                    }
+
+                    slides[slideIndex].style.display = "block";
+                    dots[slideIndex].className += " active";
+                    slideIndex++;
+                    if (slideIndex > slides.length - 1) {
+                        slideIndex = 0
+                    }
+                    setTimeout(showSlides, 1200);
+                }
+                showSlides(slideIndex = 0);
+
+                function currentSlide(n) {
+                    showSlides(slideIndex = n);
+                }
+            </script>
+        </div>
+
+    <div class="content container">
+        <div class="content-movie">
+            <div class="content-event">
+                <div class="content-event-title">
+                    <h2>EVENT</h2>
+                </div>
+                <div class="content-event-list">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-3 col-3 banner">
+                            <a href="">
+                                <img src="~/LayoutDatVe/img/evleft.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-6 banner">
+                            <a href="">
+                                <img src="~/LayoutDatVe/img/evcenter.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-3 banner">
+                            <a href="">
+                                <img src="~/LayoutDatVe/img/evleft.jpg" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!-- Footer -->
+<div class="footer">
+        <div class="footer-theater container">
+            <ul>
+                <a href="">
+                    <img src="~/LayoutDatVe/img/1.png" alt="">
+                </a>
+                <a href="">
+                    <img src="~/LayoutDatVe/img/2.png" alt="">
+                </a>
+                <a href="">
+                    <img src="~/LayoutDatVe/img/5.png" alt="">
+                </a>
+                <a href="">
+                    <img src="~/LayoutDatVe/img/6.png" alt="">
+                </a>
+                <a href="">
+                    <img src="~/LayoutDatVe/img/7.png" alt="">
+                </a>
+                <a href="">
+                    <img src="~/LayoutDatVe/img/9.png" alt="">
+                </a>
+                <a href="">
+                    <img src="~/LayoutDatVe/img/8.png" alt="">
+                </a>
+                <a href="">
+                    <img src="~/LayoutDatVe/img/10.png" alt="">
+                </a>
+                <a href="">
+                    <img src="~/LayoutDatVe/img/11.png" alt="">
+                </a>
+            </ul>
+        </div>
+        <div id="footerblurb">
+            <div id="footerblurb-inner">
+                <div class="column">
+                    <h6><span>MUA VÉ XEM PHIM</span></h6>
+                    <p> 
+                        <a href="">Lịch chiếu phim</a> <br>
+                        <a href="">Rạp chiếu phim</a> <br>
+                        <a href="">Phim chiếu rạp</a>  <br>                      
+                        <a href=””>Review phim</a> <br>
+                        <a href=””>Top phim</a> <br>
+
+                        <a href="">Blog phim</a>                
+                 </div>
+                <div class="column">
+                    <h6><span>DỊCH VỤ NỔI BẬT</span></h6>
+                    <p> 
+                        <a href="">Vé xem phim</a><br>
+                        <a href="#">Bảo hiểm ô tô</a><br>
+                        <a href="#">Vé máy bay</a><br>
+                        <a href="#">Khách sạn</a><br>
+                        <a href="">Ví nhân ái</a><br>
+                        <a href="">Vay nhanh</a>
+                     </p>
+                </div>
+                <div class="column">
+                    <h6><span>CHĂM SÓC KHÁCH HÀNG</span></h6>
+                    <p> <a >Địa chỉ: <b>Đại học Thủ Dầu Một</b></a><br>
+                        Hottline: <a href="#"><B>Chăm Sóc Khách Hàng</B></a><br>
+                        Email: <a href="#"><b>hotro@momo.vn</b></a><br>
+                        Tổng đài gọi ra: <a href="#"><b>0974282173</b> - </a><a href=""><b>0391726252</b></a><br>
+                    </p>
+                    <h6><span>HỢP TÁC DOANH NGHIỆP</span></h6>
+                    <p>
+                        Hottline: <a href=""><b>1900 636 652</b></a><br>
+                        Email: <a href=""><b>merchant.care@momo.vn</b></a><br>
+                        Website: <a href=""><b>business.momo.vn</b></a>
+                    </p>
+                </div>
+                <div class="clr"></div>
+            </div>
+        </div>
+        <div class="footer-end">
+        </div>
+    </div>
+    <!-- End Footer -->
+<script src="~/LayoutDatVe/js/admin.js"></script>
+<script src="~/LayoutDatVe/js/index.js"></script>
+<script src="~/LayoutDatVe/js/js.js"></script>
+<script src="~/LayoutDatVe/js/listTheater.js"></script>
+<script src="~/LayoutDatVe/js/movieD.js"></script>
+<script src="~/LayoutDatVe/js/userInfo.js"></script>
+</body>
+</html>
