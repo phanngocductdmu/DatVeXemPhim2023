@@ -1,0 +1,36 @@
+﻿@model DatVeXemPhim2023.Models.TPhongChieu
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "SuaSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Sữa Ghế</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="SuaPhong" asp-route-IdUser="@ViewBag.IdUser">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TenPhongChieu" />
+            <div class="form-group">
+                <label asp-for="TenPhongChieu" class="control-label"></label>
+                <input asp-for="TenPhongChieu" class="form-control" />
+                <span asp-validation-for="TenPhongChieu" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="IdrapChieuPhim" class="control-label"></label>
+                <input asp-for="IdrapChieuPhim" class="form-control" type="hidden" />
+                <span asp-validation-for="IdrapChieuPhim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="admin/PhongXemPhim" asp-route-IdUser="@ViewBag.IdUser">Quay Lại</a>
+</div>
+

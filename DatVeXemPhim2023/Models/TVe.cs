@@ -18,6 +18,4 @@ public partial class TVe
     public string? TrangThai { get; set; }
 
     public virtual TSuatChieu IdsuatChieuNavigation { get; set; } = null!;
-
-    public virtual ICollection<TThanhToan> TThanhToans { get; set; } = new List<TThanhToan>();
 }

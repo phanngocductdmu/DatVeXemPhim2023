@@ -25,7 +25,8 @@ public partial class TPhim
 
     public double? DanhGia { get; set; }
 
-    public virtual ICollection<TDanhGium> TDanhGia { get; set; } = new List<TDanhGium>();
+    public virtual ICollection<TDanhGia> TDanhGia { get; set; } = new List<TDanhGia>();
 
     public virtual ICollection<TSuatChieu> TSuatChieus { get; set; } = new List<TSuatChieu>();
+   
 }

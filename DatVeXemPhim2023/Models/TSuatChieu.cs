@@ -11,6 +11,8 @@ public partial class TSuatChieu
 
     public int IdrapChieuPhim { get; set; }
 
+    public string? TenPhongChieu { get; set; }
+
     public DateTime? TgbatDau { get; set; }
 
     public DateTime? TgketThuc { get; set; }

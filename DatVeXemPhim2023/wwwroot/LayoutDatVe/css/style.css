@@ -1,4 +1,4 @@
-/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+! normalize.css v3.0.0 | MIT License | git.io/normalize 
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -783,7 +783,7 @@ table {
 .col-width-sm {
   width: 11%;
 }
-/* draw any selected text white on black background */
+ draw any selected text white on black background 
 ::-moz-selection {
   background: #4c4145;
   color: #ffffff;
@@ -791,22 +791,6 @@ table {
 ::selection {
   background: #4c4145;
   color: #ffffff;
-}
-.top-scroll {
-  bottom: 55px;
-  height: 50px;
-  position: fixed;
-  right: 5%;
-  width: 50px;
-  z-index: 100;
-}
-.top-scroll a {
-  background: url("../images/components/arrow.svg") repeat scroll center center rgba(76, 65, 69, 0.8);
-  display: block;
-  height: 50px;
-}
-.top-scroll a:hover {
-  background: url("../images/components/arrow.svg") repeat scroll center center rgba(254, 80, 90, 0.8);
 }
 .inv-em {
   top: -5px;
@@ -4396,7 +4380,7 @@ ul#navigation a:hover {
   width: 24px;
   height: 4px;
   background-color: #ffffff;
-  /*create the upper and lower lines as pseudo-elements of the middle line*/
+  create the upper and lower lines as pseudo-elements of the middle line
 }
 .lines:before,
 .lines:after {
@@ -6584,14 +6568,14 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   top: 18px;
   left: 18px;
 }
-.sits-area--mobile .sits__checked:after {
+/*.sits-area--mobile .sits__checked:after {
   content: "=";
   font: 13px;
   color: #ffffff;
   position: absolute;
   bottom: 16px;
   right: 55px;
-}
+}*/
 .sits-area--mobile .sits__checked .checked-place {
   overflow: hidden;
   max-width: 80%;
@@ -7698,7 +7682,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   margin: 0 auto;
   max-width: 400px;
 }
-/* Overlay style */
+ Overlay style 
 .overlay {
   position: fixed;
   width: 100%;
@@ -7708,7 +7692,7 @@ ul#navigation li.mega-menu__nav-item:hover:before {
   background: rgba(76, 65, 69, 0.6);
   z-index: 300;
 }
-/* Overlay closing cross */
+ Overlay closing cross 
 .overlay .overlay-close {
   width: 30px;
   height: 30px;

@@ -21,5 +21,5 @@ public partial class TTaiKhoan
 
     public virtual ICollection<THoaDon> THoaDons { get; set; } = new List<THoaDon>();
 
-    public virtual ICollection<TThongTinKhuyenMai> TThongTinKhuyenMais { get; set; } = new List<TThongTinKhuyenMai>();
+    public virtual ICollection<TTheoDoi> TTheoDois { get; set; } = new List<TTheoDoi>();
 }

@@ -1,0 +1,142 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model DatVeXemPhim2023.ViewModels.ListClass
+
+<!-- Mobile Specific Metas-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="telephone=no" name="format-detection">
+
+<!-- Fonts -->
+<!-- Font awesome - icon font -->
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<!-- Roboto -->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+
+<!-- Stylesheets -->
+<!-- Mobile menu -->
+<link href="~/LayoutDatVe/css/gozha-nav.css" rel="stylesheet" />
+<!-- Select -->
+<link href="~/LayoutDatVe/css/external/jquery.selectbox.css" rel="stylesheet" />
+
+<!-- Custom -->
+<link href="~/LayoutDatVe/css/style.css?v=1" rel="stylesheet" />
+
+<!-- Modernizr -->
+<script src="~/LayoutDatVe/js/external/modernizr.custom.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+<![endif]-->
+<section class="container">
+    <div class="order-container">
+        <div class="order">
+            <img class="order__images" alt='' src="~/LayoutDatVe/img/tickets.png">
+            <p class="order__title">Đặt vé <br><span class="order__descript">và chúc bạn có thời gian xem phim vui vẻ</span></p>
+        </div>
+    </div>
+    <div class="order-step-area">
+        <div class="order-step first--step order-step--disable ">1. Ở đâu &amp; Khi nào</div>
+        <div class="order-step second--step order-step--disable">2. Chọn chỗ ngồi</div>
+        <div class="order-step third--step">3. Thủ tục thanh toán</div>
+    </div>
+
+    <div class="col-sm-12">
+        <div class="checkout-wrapper">
+            <h2 class="page-heading">Hóa đơn</h2>
+             
+            <div class="w-100">
+                <table class="table-check table">
+                    <thead>
+                        <tr class="table-title-check">
+                            <th scope="col">Tên</th>
+                            <th scope="col">Giá</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-content-check">
+                        
+                    </tbody>
+
+                </table>
+                <div style="float:right; font-size:20px; font-weight: bold;"><span style="">Tổng tiền:</span> <span class="text-danger" id="total-check">123</span></div>
+            </div>
+            <h2 class="page-heading">Lựa chọn hình thức thanh toán</h2>
+            <div class="payment">
+                <a href="#" class="payment__item">
+                    <img alt='' src="~/LayoutDatVe/img/pay/pay1.png">
+                </a>
+                <a href="#" class="payment__item">
+                    <img alt='' src="~/LayoutDatVe/img/pay/pay2.png">
+                </a>
+                <a href="#" class="payment__item">
+                    <img alt='' src="~/LayoutDatVe/img/pay/pay3.png">
+                </a>
+                <a href="#" class="payment__item">
+                    <img alt='' src="~/LayoutDatVe/img/pay/pay4.png">
+                </a>
+                <a href="#" class="payment__item">
+                    <img alt='' src="~/LayoutDatVe/img/pay/pay5.png">
+                </a>
+                <a href="#" class="payment__item">
+                    <img alt='' src="~/LayoutDatVe/img/pay/pay6.png">
+                </a>
+                <a href="#" class="payment__item">
+                    <img alt='' src="~/LayoutDatVe/img/pay/pay7.png">
+                </a>
+            </div>
+
+            <h2 class="page-heading">Thông tin liên lạc</h2>
+
+            <form id='contact-info' method='post' novalidate="" class="form contact-info">
+                <div class="contact-info__field contact-info__field-mail">
+                    <input id="check-hoadon-emailUser" type='email' name='user-mail' placeholder='Your email' class="form__mail" required>
+                </div>
+                <div class="contact-info__field contact-info__field-tel">
+                    <input id="check-hoadon-phoneUser" type='tel' name='user-tel' placeholder='Phone number' class="form__mail" required>
+                </div>
+            </form>
+
+
+        </div>
+
+        <div class="order">
+            <a class="btn btn-md btn--warning btn--wide" data-idUser="@ViewBag?.UserId" data-idPhim="@Model?.phims?.Idphim" onclick="LuuHoaDon(this.getAttribute('data-idPhim'), this.getAttribute('data-idUser'))">Đặt vé</a>
+        </div>
+
+    </div>
+
+</section>
+
+<div class="clearfix"></div>
+
+<div class="booking-pagination">
+    <a asp-controller="home" asp-action="datchongoi" asp-route-IdPhim="@Model?.phims?.Idphim" class="booking-pagination__prev">
+        <p class="arrow__text arrow--prev">bước trước</p>
+        <span class="arrow__info">chọn chỗ ngồi</span>
+    </a>
+    <a href="#" class="booking-pagination__next hide--arrow">
+        <p class="arrow__text arrow--next">bước tiếp theo</p>
+        <span class="arrow__info"></span>
+    </a>
+</div>
+
+<!-- JavaScript-->
+<!-- jQuery 1.9.1-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/external/jquery-1.10.1.min.js"><\/script>')</script>
+<!-- Migrate -->
+<script src="~/LayoutDatVe/js/external/jquery-migrate-1.2.1.min.js"></script>
+<!-- Bootstrap 3-->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+<!-- Mobile menu -->
+<script src="~/LayoutDatVe/js/jquery.mobile.menu.js"></script>
+<!-- Select -->
+<script src="~/LayoutDatVe/js/external/jquery.selectbox-0.2.min.js"></script>
+
+<!-- Form element -->
+<script src="~/LayoutDatVe/js/external/form-element.js"></script>
+<!-- Form validation -->
+<script src="~/LayoutDatVe/js/form.js"></script>
+
+<script src="~/LayoutDatVe/js/checkHoaDon.js"></script>

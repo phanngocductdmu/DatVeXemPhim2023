@@ -5,21 +5,31 @@ namespace DatVeXemPhim2023.Models;
 
 public partial class THoaDon
 {
-    public int IdhoaDon { get; set; }
+    public int Id { get; set; }
 
-    public int IddoVat { get; set; }
+    public string? IdHoaDon { get; set; }
 
-    public int? Iduser { get; set; }
+    public int? IdFood { get; set; }
 
-    public int Idve { get; set; }
+    public int? IdUser { get; set; }
 
-    public DateTime? NgayLap { get; set; }
+    public int? IdPhim { get; set; }
 
-    public int? TongTien { get; set; }
+    public int? IdGhe { get; set; }
 
-    public string? TrangThai { get; set; }
+    public DateTime? CreatedAt { get; set; }
 
-    public virtual TTaiKhoan? IduserNavigation { get; set; }
+    public string? NameGhe { get; set; }
 
-    public virtual ICollection<TThanhToan> TThanhToans { get; set; } = new List<TThanhToan>();
+    public double? GiaGhe { get; set; }
+
+    public string? NameFood { get; set; }
+
+    public double? GiaFood { get; set; }
+
+    public int? IdRapPhim { get; set; }
+
+    public int? IdSuatChieu { get; set; }
+
+    public virtual TTaiKhoan? IdUserNavigation { get; set; }
 }

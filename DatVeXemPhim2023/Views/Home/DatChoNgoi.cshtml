@@ -1,0 +1,340 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model DatVeXemPhim2023.ViewModels.ListClass
+
+<!-- Mobile Specific Metas-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="telephone=no" name="format-detection">
+
+<!-- Fonts -->
+<!-- Font awesome - icon font -->
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<!-- Roboto -->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+
+<!-- Stylesheets -->
+<!-- Mobile menu -->
+<link href="~/LayoutDatVe/css/gozha-nav.css" rel="stylesheet" />
+<!-- Select -->
+<link href="~/LayoutDatVe/css/external/jquery.selectbox.css" rel="stylesheet" />
+
+<!-- Custom -->
+<link href="~/LayoutDatVe/css/style.css?v=1" rel="stylesheet" />
+
+<!-- Modernizr -->
+<script src="~/LayoutDatVe/js/external/modernizr.custom.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+<div class="place-form-area">
+    <section class="container">
+        <div class="order-container">
+            <div class="order">
+                <img class="order__images" alt='' src="~/LayoutDatVe/img/tickets.png">
+                <p class="order__title">Đặt vé <br><span class="order__descript">và chúc bạn có thời gian xem phim vui vẻ</span></p>
+            </div>
+        </div>
+        <div class="order-step-area">
+            <div class="order-step first--step order-step--disable ">1. Ở đâu &amp; Khi nào</div>
+            <div class="order-step second--step">2. Chọn chỗ ngồi</div>
+        </div>
+
+        <div class="choose-sits">
+            <div class="choose-sits__info choose-sits__info--first">
+                <ul>
+                    <li class="sits-price marker--none"><strong>Giá</strong></li>
+                    <li class="sits-price sits-price--cheap">10000</li>
+                    <li class="sits-price sits-price--middle">15000</li>
+                    <li class="sits-price sits-price--expensive">30000</li>
+                </ul>
+            </div>
+
+            <div class="choose-sits__info">
+                <ul>
+                    <li class="sits-state sits-state--not">Không có sẵn</li>
+                    <li class="sits-state sits-state--your">Lựa chọn của bạn</li>
+                </ul>
+            </div>
+
+            <div class="col-sm-12 col-lg-10 col-lg-offset-1">
+                <div class="sits-area hidden-xs">
+                    <div class="sits-anchor">màn hình</div>
+
+                    <div class="sits">
+                        <aside class="sits__line">
+                            <span class="sits__indecator">A</span>
+                            <span class="sits__indecator">B</span>
+                            <span class="sits__indecator">C</span>
+                            <span class="sits__indecator">D</span>
+                            <span class="sits__indecator">E</span>
+                            <span class="sits__indecator">F</span>
+                            <span class="sits__indecator">G</span>
+                            <span class="sits__indecator">I</span>
+                            <span class="sits__indecator additional-margin">J</span>
+                            <span class="sits__indecator">K</span>
+                            <span class="sits__indecator">L</span>
+                        </aside>
+                        <div class="sits__row">
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "A")
+                                {
+                                    if (Model.LhoaDons.Any(h => h?.IdGhe == item?.Idghe))
+                                    {
+                                        <span class="sits__place sits-price--cheap sits sits-state--not disabled" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                    }
+                                    else
+                                    {
+                                        <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--cheap sits" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                    }
+                                }
+
+                            }
+                        </div>
+                        <div class="sits__row">
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "B")
+                                {
+                                    <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--cheap sits" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                }
+                            }
+                        </div>
+
+                        <div class="sits__row">
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "C")
+                                {
+                                    <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--cheap sits" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                }
+                            }
+                        </div>
+
+                        <div class="sits__row">
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "D")
+                                {
+                                    <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--cheap sits" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                }
+                            }
+                            @* <span class="sits__place sits-price--cheap sits-state--not" data-place='D8' data-price='10'>D8</span> *@
+                        </div>
+
+                        <div class="sits__row">
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "D")
+                                {
+                                    <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--middle sits" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                }
+                            }
+                        </div>
+
+                        <div class="sits__row">
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "F")
+                                {
+                                    <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--middle sits" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                }
+                            }
+                        </div>
+
+                        <div class="sits__row">
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "G")
+                                {
+                                    <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--middle sits" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                }
+                            }
+                        </div>
+
+                        <div class="sits__row">
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "I")
+                                {
+                                    <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--middle sits" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                }
+                            }
+                        </div>
+
+                        <div class="sits__row additional-margin">
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "J")
+                                {
+                                    <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--expensive sits" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                }
+                            }
+                        </div>
+
+                        <div class="sits__row">
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "K")
+                                {
+                                    <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--expensive sits" data-idGhe="@item?.Idghe" data-place='@item?.TenGhe' data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                }
+                            }
+                        </div>
+
+                        <div class="sits__row">
+
+                            @foreach (var item in Model.Lghes)
+                            {
+                                if (item.HangGhe?.Trim() == "L")
+                                {
+                                    <span onclick="TinhTongTienGhe(this.getAttribute('data-price'), this.getAttribute('data-place'), this.getAttribute('data-idGhe'))" class="sits__place sits-price--expensive sits" data-place=@item?.TenGhe data-price='@item?.GiaGhe'>@item?.TenGhe</span>
+                                }
+                            }
+                        </div>
+
+                        <aside class="sits__checked">
+                            <div class="checked-place">
+                            </div>
+                            <div class="result-price text-white">0</div>
+                        </aside>
+                        <footer class="sits__number">
+                            <span class="sits__indecator">1</span>
+                            <span class="sits__indecator">2</span>
+                            <span class="sits__indecator">3</span>
+                            <span class="sits__indecator">4</span>
+                            <span class="sits__indecator">5</span>
+                            <span class="sits__indecator">6</span>
+                            <span class="sits__indecator">7</span>
+                            <span class="sits__indecator">8</span>
+                            <span class="sits__indecator">9</span>
+                            <span class="sits__indecator">10</span>
+                            <span class="sits__indecator">11</span>
+                            <span class="sits__indecator">12</span>
+                            <span class="sits__indecator">13</span>
+                            <span class="sits__indecator">14</span>
+                            <span class="sits__indecator">15</span>
+                            <span class="sits__indecator">16</span>
+                            <span class="sits__indecator">17</span>
+                            <span class="sits__indecator">18</span>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 visible-xs">
+                <div class="sits-area--mobile">
+                    <div class="sits-area--mobile-wrap">
+                        <div class="sits-select">
+                            <select name="sorting_item" class="sits__sort sit-row" tabindex="0">
+                                <option value="1" selected='selected'>A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                                <option value="5">E</option>
+                                <option value="6">F</option>
+                                <option value="7">G</option>
+                                <option value="8">I</option>
+                                <option value="9">J</option>
+                                <option value="10">K</option>
+                                <option value="11">L</option>
+                            </select>
+
+                            <select name="sorting_item" class="sits__sort sit-number" tabindex="1">
+                                <option value="1" selected='selected'>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                            </select>
+
+                            <a href="#" class="btn btn-md btn--warning toogle-sits">Chọn ngồi</a>
+                        </div>
+                    </div>
+
+                    <a href="#" class="watchlist add-sits-line">Thêm chỗ ngồi mới</a>
+
+                    <aside class="sits__checked">
+                        <div class="checked-place">
+                            <span class="choosen-place"></span>
+                        </div>
+                        <div class="checked-result">
+                            VND
+                        </div>
+                    </aside>
+
+                    <img alt="" src="~/LayoutDatVe/img/sits_mobile.png">
+                </div>
+            </div>
+
+        </div>
+
+</div>
+ </section>
+        </div>
+<div class="clearfix"></div>
+<form id='film-and-time' class="booking-form" method='get' action='DatChoNgoi'>
+
+    <input type='text' name='choosen-number' class="choosen-number">
+    <input type='text' name='choosen-number--cheap' class="choosen-number--cheap">
+    <input type='text' name='choosen-number--middle' class="choosen-number--middle">
+    <input type='text' name='choosen-number--expansive' class="choosen-number--expansive">
+    <input type='text' name='choosen-cost' class="choosen-cost">
+    <input type='text' name='choosen-sits' class="choosen-sits">
+
+
+    <div class="booking-pagination booking-pagination--margin">
+        <a asp-controller="datve" asp-action="diachi" asp-route-IdPhim="@Model.phims.Idphim" asp-route-IdRapPhim="@Model.rapChieuPhim.IdrapChieuPhim" class="booking-pagination__prev">
+            <span class="arrow__text arrow--prev">bước trước</span>
+            <span class="arrow__info">Ở Đâu&amp;Khi nào</span>
+        </a>
+        <a onclick="DatChoNgoi(this.getAttribute('data-idPhim'), this.getAttribute('data-idRapPhim'))" data-idPhim="@Model.phims.Idphim" data-idRapPhim="@Model.rapChieuPhim.IdrapChieuPhim" class="booking-pagination__next">
+            <span class="arrow__text arrow--next">bước tiếp theo</span>
+            <span class="arrow__info">Mua Đồ ăn, nước uống</span>
+        </a>
+    </div>
+</form>
+<!-- JavaScript-->
+<!-- jQuery 1.9.1-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/external/jquery-1.10.1.min.js"><\/script>')</script>
+<!-- Migrate -->
+<script src="js/external/jquery-migrate-1.2.1.min.js"></script>
+<!-- Bootstrap 3-->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+<!-- Mobile menu -->
+<script src="~/LayoutDatVe/js/jquery.mobile.menu.js"></script>
+<!-- Select -->
+<script src="~/LayoutDatVe/js/external/jquery.selectbox-0.2.min.js"></script>
+
+<!-- Form element -->
+<script src="~/LayoutDatVe/js/external/form-element.js"></script>
+<!-- Form validation -->
+<script src="~/LayoutDatVe/js/form.js"></script>
+
+<!-- Custom -->
+<script src="~/LayoutDatVe/js/custom.js"></script>
+
+<script src="~/LayoutDatVe/js/datChoNgoi.js"></script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        init_BookingTwo();
+    });
+</script>

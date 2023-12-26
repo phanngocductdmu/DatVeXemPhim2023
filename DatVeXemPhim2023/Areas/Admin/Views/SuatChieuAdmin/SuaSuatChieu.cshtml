@@ -1,0 +1,44 @@
+﻿@model DatVeXemPhim2023.Models.TSuatChieu
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "SuaSuatChieu";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Sữa Suất Chiếu</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-area="Admin" asp-controller="SuatChieuAdmin" asp-action="SuaSuatChieu" asp-route-IdUser="@ViewBag.IdUser" asp-route-IdPhim="@Model.Idphim">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdsuatChieu" />
+            <div class="form-group">
+                <label asp-for="TenPhongChieu" class="control-label"></label>
+                <select asp-for="TenPhongChieu" asp-items="ViewBag.DanhSachPhongChieu" class="form-control"></select>
+                <span asp-validation-for="TenPhongChieu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TgbatDau" class="control-label"></label>
+                <input asp-for="TgbatDau" class="form-control" />
+                <span asp-validation-for="TgbatDau" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TgketThuc" class="control-label"></label>
+                <input asp-for="TgketThuc" class="form-control" />
+                <span asp-validation-for="TgketThuc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="hidden" asp-for="IdrapChieuPhim" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-area="Admin" asp-controller="SuatChieuAdmin" asp-action="DanhSachSuatChieu" asp-route-IdUser="@ViewBag.IdUser" asp-route-IdPhim="@Model.Idphim">Back to List</a>
+</div>
+

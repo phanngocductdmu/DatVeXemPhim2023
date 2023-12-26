@@ -1,0 +1,108 @@
+﻿@using DatVeXemPhim2023.Models;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@model TThongTinKhuyenMai;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "DanhSachUuDai&KhuyenMai";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<p>
+    <a asp-area="admin" asp-controller="TinMoiVaUuDai" asp-action="DanhSachKhuyenMai">Quay lại danh sách</a>
+</p>
+<p>
+    <a asp-area="admin" asp-controller="TinMoiVaUuDai" asp-action="SuaKhuyenMai" asp-route-IdKhuyenMai="@ViewBag.IdKhuyenMai">CHỈNH SỮA</a>
+</p>
+<p>
+    <a asp-area="admin" asp-controller="TinMoiVaUuDai" asp-action="XoaKhuyenMai" asp-route-IdKhuyenMai="@Model.IdkhuyenMai">XÓA</a>
+</p>
+<style>
+    .table-container {  
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse; /* Gộp đường viền */
+    }
+
+        .table td {
+            white-space: normal;
+            vertical-align: top; /* Nội dung nằm trên cùng */
+            text-align: left; /* Căn lề trái */
+            border: 1px solid #ddd; /* Đường viền */
+            padding: 12px; /* Khoảng cách giữa nội dung và đường viền */
+        }
+
+    .wide-column {
+        width: 600px; /* Đặt kích thước của cột thứ 2 và cột thứ 3 */
+    }
+
+    .large-img {
+        width: 60px; /* Đặt kích thước mới của hình ảnh */
+        margin: 0 auto; /* Hình ảnh giữa cùng */
+        display: block; /* Chắc chắn rằng hình ảnh là một khối hiển thị */
+    }
+</style>
+
+<h3>Chi Tiết Khuyến Mãi</h3>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên Ưu Đãi</th>
+                <th class="wide-column">Nội Dung 1</th>
+                <th class="wide-column">Nội Dung 2</th>
+                <th class="wide-column">Nội Dung 3</th>
+                <th class="large-img">Hình Ảnh</th>
+                <th>Thời Gian Bắt Đầu</th>
+                <th>Thời Gian Kết Thúc</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @{
+                        var indexOfColon = Model.TenUuDaiVaKhuyenMai?.IndexOf(":") ?? -1;
+                        var boldText = indexOfColon >= 0 ? "font-weight-bold" : "";
+                    }
+
+                    @Html.Raw($"<strong class='{boldText}'>{Model.TenUuDaiVaKhuyenMai?.Substring(0, indexOfColon + 1)}</strong>{Model.TenUuDaiVaKhuyenMai?.Substring(indexOfColon + 1)}")
+                </td>
+                <td>
+                    @{
+                        var indexOfColon1 = Model.NdkhuyenMai1?.IndexOf(":") ?? -1;
+                        var boldText1 = indexOfColon1 >= 0 ? "font-weight-bold" : "";
+                    }
+
+                    @Html.Raw($"<strong class='{boldText1}'>{Model.NdkhuyenMai1?.Substring(0, indexOfColon1 + 1)}</strong>{Model.NdkhuyenMai1?.Substring(indexOfColon1 + 1)}")
+                </td>
+                <td class="wide-column">
+                    @{
+                        var indexOfColon2 = Model.NdkhuyenMai2?.IndexOf(":") ?? -1;
+                        var boldText2 = indexOfColon2 >= 0 ? "font-weight-bold" : "";
+                    }
+
+                    @Html.Raw($"<strong class='{boldText2}'>{Model.NdkhuyenMai2?.Substring(0, indexOfColon2 + 1)}</strong>{Model.NdkhuyenMai2?.Substring(indexOfColon2 + 1)}")
+                </td>
+                <td class="wide-column">
+                    @{
+                        var indexOfColon3 = Model.NdkhuyenMai3?.IndexOf(":") ?? -1;
+                        var boldText3 = indexOfColon3 >= 0 ? "font-weight-bold" : "";
+                    }
+
+                    @Html.Raw($"<strong class='{boldText3}'>{Model.NdkhuyenMai3?.Substring(0, indexOfColon3 + 1)}</strong>{Model.NdkhuyenMai3?.Substring(indexOfColon3 + 1)}")
+                </td>
+                <td >
+                    @Html.DisplayFor(modelItem => Model.HinhAnh)
+                    <img src="~/LayoutDatVe/UuDaiVaKhuyenMai/@Model.HinhAnh">
+                </td>
+                <td>@((Model.TimeBegin ?? DateTime.MinValue).ToString("HH:mm"))</td>  
+                <td>@((Model.TimeEnd ?? DateTime.MinValue).ToString("HH:mm"))</td>                
+            </tr>
+        </tbody>
+    </table>
+</div>

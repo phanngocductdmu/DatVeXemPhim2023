@@ -1,4 +1,5 @@
-﻿@model TPhim
+﻿@model DatVeXemPhim2023.ViewModels.ListClass
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!-- Fonts -->
 <!-- Font awesome - icon font -->
@@ -28,32 +29,29 @@
 <section class="container">
     <div class="col-sm-12">
         <div class="movie">
-            <h2 class="page-heading">@Model.TenPhim</h2>
-
+            <h2 class="page-heading">@Model.phims.TenPhim</h2>
             <div class="movie__info">
                 <div class="col-sm-4 col-md-3 movie-mobile">
                     <div class="movie__images">
                         <span class="movie__rating">@ViewBag.DanhGia</span>
-                        <img alt='' src="~/LayoutDatVe/phim/@Model.HinhAnh">
+                        <img alt='' src="~/LayoutDatVe/phim/@Model.phims.HinhAnh">
                     </div>
                 </div>
                    
                 <div class="col-sm-8 col-md-9">
-                    <p class="movie__time">@Model.ThoiLuong phút</p>
+                    <p class="movie__time">@Model.phims.ThoiLuong phút</p>
 
                     <p class="movie__option"><strong>Quốc gia: </strong><a href="#">New Zeland</a>, <a href="#">USA</a></p>
                     <p class="movie__option"><strong>Năm: </strong><a href="#">2012</a></p>
-                    <p class="movie__option"><strong>Loại: </strong><a href="#">Adventure</a>, <a href="#">Fantazy</a></p>
-                    <p class="movie__option"><strong>Release date: </strong>December 12, 2012</p>
-                    <p class="movie__option"><strong>Ngày phát hành </strong><a href="#">Peter Jackson</a></p>
-                    <p class="movie__option"><strong>Diễn viên: </strong><a href="#">Martin Freeman</a>, <a href="#">Ian McKellen</a>, <a href="#">Richard Armitage</a>, <a href="#">Ken Stott</a>, <a href="#">Graham McTavish</a>, <a href="#">Cate Blanchett</a>, <a href="#">Hugo Weaving</a>, <a href="#">Ian Holm</a>, <a href="#">Elijah Wood</a> <a href="#">...</a></p>
+                    <p class="movie__option"><strong>Loại: </strong><a href="#">@Model.phims.TheLoai</a>,
+                    <p class="movie__option"><strong>Ngày phát hành: </strong>December 12, 2012</p>
+                    <p class="movie__option"><strong>Diễn viên: </strong><a href="#">@Model.phims.DienVien</a></p>
                     <p class="movie__option"><strong>Giới hạn độ tuổi: </strong><a href="#">13</a></p>
                     <p class="movie__option"><strong>Phòng vé: </strong><a href="#">$1 017 003 568</a></p>
-
                     <a href="#" class="comment-link">Bình luận:  15</a>
 
                     <div class="movie__btns movie__btns--full">
-                        <a href="#" class="btn btn-md btn--warning">Đặt vé xem phim này</a>
+                        <a asp-controller="datve" asp-action="datve" asp-route-IdPhim="@Model.phims.Idphim" class="btn btn-md btn--warning">Đặt vé xem phim này</a>
                         <a href="#" class="watchlist">Thêm vào danh sách theo dõi</a>
                     </div>
 
@@ -70,9 +68,9 @@
 
             <div class="clearfix"></div>
 
-            <h2 class="page-heading">The plot</h2>
+            <h2 class="page-heading">@Model.phims.TenPhim</h2>
 
-            <p class="movie__describe">Wolfoo and The Mysterious Island (Wolfoo và hòn đảo kỳ bí) - câu chuyện xoanh quanh nhân vật chính là chú sói nhỏ Wolfoo 8 tuổi - một chú bé vui vẻ, tốt bụng và yêu thích sự khám phá. Đồng hành cùng Wolfoo chính là cô em gái Lucy 6 tuổi tinh nghịch, hay làm nũng nhưng vô cùng yêu thương anh trai. Câu chuyện bắt đầu khi hai anh em Wolfoo và Lucy bị hút vào một chiếc dây chuyền và đến với Linh Giới - một thế giới vô cùng kỳ diệu. Tại Linh Giới, một sự cố bất ngờ đã khiến hai anh em bị chia tách. Trong hành trình tìm em gái, Wolfoo đã vô tình bị cuốn vào cuộc đấu tranh khốc liệt chống lại binh đoàn quỷ dữ - đứng đầu là Chúa Quỷ Bane - đang cai trị Đảo Thần Bí. Không chỉ là câu chuyện phiêu lưu thuần túy, bộ phim còn mang trong mình những bài học quý giá về sự sáng tạo, sự can đảm và cả tình yêu thương. Tất cả những điều đó đã tạo nên một bộ phim thỏa mãn sự giải trí nhưng cũng đầy tính giáo dục. </p>
+            <p class="movie__describe">@Model.phims.MoTa</p>
 
             <h2 class="page-heading">photos &amp; videos</h2>
 
@@ -87,70 +85,70 @@
                         <!--First Slide-->
                         <div class="swiper-slide media-video">
                             <a href='' class="movie__media-item ">
-                                <img alt='' src="~/LayoutDatVe/img/phim/wolfoo.jpg">
+                                <img alt='' src="~/LayoutDatVe/img/phim/@Model.phims.HinhAnh">
                             </a>
                         </div>
 
                         <!--Second Slide-->
                         <div class="swiper-slide media-video">
                             <a href='' class="movie__media-item">
-                                <img alt='' src="~/LayoutDatVe/img/phim/wolfoo.jpg">
+                                <img alt='' src="~/LayoutDatVe/img/phim/@Model.phims.HinhAnh">
                             </a>
                         </div>
 
                         <!--Third Slide-->
                         <div class="swiper-slide media-photo">
                             <a href='' class="movie__media-item">
-                                <img alt='' src="~/LayoutDatVe/img/phim/wolfoo.jpg">
+                                <img alt='' src="~/LayoutDatVe/img/phim/@Model.phims.HinhAnh">
                             </a>
                         </div>
 
                         <!--Four Slide-->
                         <div class="swiper-slide media-photo">
                             <a href='' class="movie__media-item">
-                                <img alt='' src="~/LayoutDatVe/img/phim/wolfoo.jpg">
+                                <img alt='' src="~/LayoutDatVe/img/phim/@Model.phims.HinhAnh">
                             </a>
                         </div>
 
                         <!--Slide-->
                         <div class="swiper-slide media-photo">
                             <a href='' class="movie__media-item">
-                                <img alt='' src="~/LayoutDatVe/img/phim/wolfoo.jpg">
+                                <img alt='' src="~/LayoutDatVe/img/phim/@Model.phims.HinhAnh">
                             </a>
                         </div>
 
                         <!--Slide-->
                         <div class="swiper-slide media-photo">
                             <a href='' class="movie__media-item">
-                                <img alt='' src="~/LayoutDatVe/img/phim/wolfoo.jpg">
+                                <img alt='' src="~/LayoutDatVe/img/phim/@Model.phims.HinhAnh">
                             </a>
                         </div>
 
                         <!--First Slide-->
                         <div class="swiper-slide media-video">
                             <a href='' class="movie__media-item ">
-                                <img alt='' src="~/LayoutDatVe/img/phim/wolfoo.jpg">
+                                <img alt='' src="~/LayoutDatVe/img/phim/@Model.phims.HinhAnh">
                             </a>
                         </div>
 
                         <!--Second Slide-->
                         <div class="swiper-slide media-video">
                             <a href='' class="movie__media-item">
-                                <img alt='' src="~/LayoutDatVe/img/phim/wolfoo.jpg">
+                                <img alt='' src="~/LayoutDatVe/img/phim/@Model.phims.HinhAnh">
                             </a>
                         </div>
 
                         <!--Slide-->
                         <div class="swiper-slide media-photo">
                             <a href='' class="movie__media-item">
-                                <img alt='' src="~/LayoutDatVe/img/phim/wolfoo.jpg">
+                                <img alt='' src="~/LayoutDatVe/img/phim/@Model.phims.HinhAnh">
                             </a>
                         </div>
 
                         <!--Slide-->
                         <div class="swiper-slide media-photo">
                             <a href='' class="movie__media-item">
-                                <img alt='' src="~/LayoutDatVe/img/phim/wolfoo.jpg">
+                                <img alt='' src="~/LayoutDatVe/img/phim/@Model.phims.HinhAnh">
                             </a>
                         </div>
 
@@ -161,124 +159,13 @@
 
         </div>
 
-        <h2 class="page-heading">showtime &amp; tickets</h2>
-        <div class="choose-container">
-            <form id='select' class="select" method='get'>
-                <select name="select_item" id="select-sort" class="select__sort" tabindex="0">
-                    <option value="1" selected='selected'>Thủ Dầu Một</option>
-                    <option value="2">Hà Nội</option>
-                    <option value="3">Đồng Nai</option>
-                    <option value="4">Bình Dương</option>
-                    <option value="5">Tây Ninh</option>
-                    <option value="3">Đà Nẵng</option>
-                    <option value="4">Ninh Thuận</option>
-                    <option value="5">Cần thơ</option>
-                </select>
-            </form>
-
-            <div class="datepicker">
-                <span class="datepicker__marker"><i class="fa fa-calendar"></i>Date</span>
-                <input type="text" id="datepicker" value='03/10/2014' class="datepicker__input">
-            </div>
-
-            <a href="#" id="map-switch" class="watchlist watchlist--map watchlist--map-full"><span class="show-map">Show cinemas on map</span><span class="show-time">Show cinema time table</span></a>
-
-            <div class="clearfix"></div>
-
-            <div class="time-select">
-                <div class="time-select__group group--first">
-                    <div class="col-sm-4">
-                        <p class="time-select__place">Cineworld</p>
-                    </div>
-                    <ul class="col-sm-8 items-wrap">
-                        <li class="time-select__item" data-time='09:40'>09:40</li>
-                        <li class="time-select__item" data-time='13:45'>13:45</li>
-                        <li class="time-select__item active" data-time='15:45'>15:45</li>
-                        <li class="time-select__item" data-time='19:50'>19:50</li>
-                        <li class="time-select__item" data-time='21:50'>21:50</li>
-                    </ul>
-                </div>
-
-                <div class="time-select__group">
-                    <div class="col-sm-4">
-                        <p class="time-select__place">Empire</p>
-                    </div>
-                    <ul class="col-sm-8 items-wrap">
-                        <li class="time-select__item" data-time='10:45'>10:45</li>
-                        <li class="time-select__item" data-time='16:00'>16:00</li>
-                        <li class="time-select__item" data-time='19:00'>19:00</li>
-                        <li class="time-select__item" data-time='21:15'>21:15</li>
-                        <li class="time-select__item" data-time='23:00'>23:00</li>
-                    </ul>
-                </div>
-
-                <div class="time-select__group">
-                    <div class="col-sm-4">
-                        <p class="time-select__place">Curzon</p>
-                    </div>
-                    <ul class="col-sm-8 items-wrap">
-                        <li class="time-select__item" data-time='09:00'>09:00</li>
-                        <li class="time-select__item" data-time='11:00'>11:00</li>
-                        <li class="time-select__item" data-time='13:00'>13:00</li>
-                        <li class="time-select__item" data-time='15:00'>15:00</li>
-                        <li class="time-select__item" data-time='17:00'>17:00</li>
-                        <li class="time-select__item" data-time='19:0'>19:00</li>
-                        <li class="time-select__item" data-time='21:0'>21:00</li>
-                        <li class="time-select__item" data-time='23:0'>23:00</li>
-                        <li class="time-select__item" data-time='01:0'>01:00</li>
-                    </ul>
-                </div>
-
-                <div class="time-select__group">
-                    <div class="col-sm-4">
-                        <p class="time-select__place">Odeon</p>
-                    </div>
-                    <ul class="col-sm-8 items-wrap">
-                        <li class="time-select__item" data-time='10:45'>10:45</li>
-                        <li class="time-select__item" data-time='16:00'>16:00</li>
-                        <li class="time-select__item" data-time='19:00'>19:00</li>
-                        <li class="time-select__item" data-time='21:15'>21:15</li>
-                        <li class="time-select__item" data-time='23:00'>23:00</li>
-                    </ul>
-                </div>
-
-                <div class="time-select__group group--last">
-                    <div class="col-sm-4">
-                        <p class="time-select__place">Picturehouse</p>
-                    </div>
-                    <ul class="col-sm-8 items-wrap">
-                        <li class="time-select__item" data-time='17:45'>17:45</li>
-                        <li class="time-select__item" data-time='21:30'>21:30</li>
-                        <li class="time-select__item" data-time='02:20'>02:20</li>
-                    </ul>
-                </div>
-            </div>
-            <script>
-                $(document).ready(function () {
-                    // Xử lý sự kiện click trên mỗi mục thời gian
-                    $('.time-select__item').on('click', function () {
-                        // Loại bỏ lớp active từ tất cả các mục thời gian
-                        $('.time-select__item').removeClass('active');
-
-                        // Thêm lớp active cho mục thời gian được click
-                        $(this).addClass('active');
-                    });
-                });
-            </script>
-
-
-            <!-- hiden maps with multiple locator-->
-            @* <div class="map">
-                <div id='cimenas-map'></div>
-            </div> *@
-
             <h2 class="page-heading">comments (15)</h2>
 
             <div class="comment-wrapper">
-                <form id="comment-form" class="comment-form" method='post'>
-                    <textarea class="comment-form__text" placeholder='Add you comment here'></textarea>
-                    <label class="comment-form__info">250 characters left</label>
-                    <button type='submit' class="btn btn-md btn--danger comment-form__btn">add comment</button>
+                <form id="comment-form" class="comment-form" method='post' action='/Home/ChiTietPhim'>
+                    <textarea name="cmt" class="comment-form__text" placeholder='Add your comment here'></textarea>
+                    <label class="comment-form__info">250 Ký tự trở lại</label>
+                    <button id="myButton" type='submit' class="btn btn-md btn--danger comment-form__btn">Bình Luận</button>
                 </form>
 
                 <div class="comment-sets">
@@ -443,5 +330,16 @@
     });
 </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("myButton").addEventListener("click", function () {
+            var userName = @Html.Raw(Json.Serialize(ViewBag.UserName));
+
+            if (userName === null) {
+                alert("Đặt vé thành công!");
+            }
+        });
+    });
+</script>
 
 

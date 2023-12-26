@@ -1,0 +1,96 @@
+﻿@using DatVeXemPhim2023.Models;
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<TPhim>
+
+@{
+    ViewData["Title"] = "DanhMucPhim";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<h3>Danh mục sản phẩm</h3>
+<p>@TempData["Message"]</p>
+
+@if (ViewBag.type=="admin")
+{
+    <p>
+        <a asp-action="ThemPhimMoi">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tên phim
+            </th>
+            
+            <th>
+                Thể Loại
+            </th>
+            <th>
+                Đạo diễn
+            </th>
+            <th>
+                Diễn viên
+            </th>
+            <th>
+                Hình ảnh
+            </th>
+            <th>
+                thời lượng
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            string @cls = "table-primary";
+        }
+@foreach (var item in Model) {
+            i = i + 1;
+            cls = "table-primary";
+            if (i % 2 == 0)
+            {
+                cls = "table-success";
+            }
+            <tr class="@cls">
+            <td>
+                @Html.DisplayFor(modelItem => item.TenPhim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TheLoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DaoDien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DienVien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HinhAnh)
+                <img src="~/LayoutDatVe/phim/@item.HinhAnh">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThoiLuong)
+            </td>
+            <td> 
+                    
+                    @if (ViewBag.type == "admin")
+                    {
+                        <a asp-action="SuaSanPham" asp-route-IdPhim="@item.Idphim">Chỉnh sữa | </a>
+                        <a asp-action="XoaPhim" asp-route-IdPhim="@item.Idphim">Xóa Phim </a>
+                    }
+                    else if(ViewBag.type == "churapphim")
+                    {
+                        <a asp-area="admin" asp-controller="suatchieuadmin" asp-action="DanhSachSuatChieu" asp-route-IdUser="@ViewBag.IdUser" asp-route-IdPhim="@item.Idphim">Danh Sách Suất Chiếu</a>
+                    }  
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@Html.PagedListPager(Model,page => Url.Action("DanhMucSanPham", new{page=page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+    LiElementClasses = new List<String> {"page-item"},
+    PageClasses = new List<String> {"page-link"}
+})

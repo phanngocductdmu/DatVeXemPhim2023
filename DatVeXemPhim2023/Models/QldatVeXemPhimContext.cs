@@ -15,9 +15,13 @@ public partial class QldatVeXemPhimContext : DbContext
     {
     }
 
+    public virtual DbSet<BangDatFood> BangDatFoods { get; set; }
+
+    public virtual DbSet<BangDatGhe> BangDatGhes { get; set; }
+
     public virtual DbSet<TComBo> TComBos { get; set; }
 
-    public virtual DbSet<TDanhGium> TDanhGia { get; set; }
+    public virtual DbSet<TDanhGia> TDanhGia { get; set; }
 
     public virtual DbSet<TDoAn> TDoAns { get; set; }
 
@@ -47,30 +51,50 @@ public partial class QldatVeXemPhimContext : DbContext
 
     public virtual DbSet<TVe> TVes { get; set; }
 
+    public virtual DbSet<TTheoDoi> TTheoDois { get; set; }
+
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=LAPTOP-IQ4VCEEV;Initial Catalog=QLDatVeXemPhim;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+        => optionsBuilder.UseSqlServer("Data Source=./;Initial Catalog=QLDatVeXemPhim;Integrated Security=True; TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<BangDatFood>(entity =>
+        {
+            entity.ToTable("BangDatFood");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<BangDatGhe>(entity =>
+        {
+            entity.ToTable("BangDatGhe");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+        });
+
         modelBuilder.Entity<TComBo>(entity =>
         {
+            // Primary Key
             entity.HasKey(e => e.IdcomBo);
 
+            // Table Name
             entity.ToTable("tComBo");
 
+            // Column Configurations
             entity.Property(e => e.IdcomBo).HasColumnName("IDComBo");
+            entity.Property(e => e.HinhAnh).HasMaxLength(100).IsFixedLength();
             entity.Property(e => e.TenCombo).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<TDanhGium>(entity =>
+        modelBuilder.Entity<TDanhGia>(entity =>
         {
             entity.HasKey(e => e.IddanhGia);
 
             entity.ToTable("tDanhGia");
 
             entity.Property(e => e.IddanhGia).HasColumnName("IDDanhGia");
-            entity.Property(e => e.DanhGiaCmt).HasMaxLength(200);
             entity.Property(e => e.Idphim).HasColumnName("IDPhim");
 
             entity.HasOne(d => d.IdphimNavigation).WithMany(p => p.TDanhGia)
@@ -85,7 +109,10 @@ public partial class QldatVeXemPhimContext : DbContext
             entity.ToTable("tDoAn");
 
             entity.Property(e => e.IddoAn).HasColumnName("IDDoAn");
-            entity.Property(e => e.TenDoAn).HasMaxLength(50);
+            entity.Property(e => e.HinhAnh)
+                .HasMaxLength(100)
+                .IsFixedLength();
+            entity.Property(e => e.Ten).HasMaxLength(50);
         });
 
         modelBuilder.Entity<TDoUong>(entity =>
@@ -95,6 +122,9 @@ public partial class QldatVeXemPhimContext : DbContext
             entity.ToTable("tDoUong");
 
             entity.Property(e => e.IddoUong).HasColumnName("IDDoUong");
+            entity.Property(e => e.HinhAnh)
+                .HasMaxLength(100)
+                .IsFixedLength();
             entity.Property(e => e.TenDoUong).HasMaxLength(50);
         });
 
@@ -144,30 +174,33 @@ public partial class QldatVeXemPhimContext : DbContext
             entity.ToTable("tGhe");
 
             entity.Property(e => e.Idghe).HasColumnName("IDGhe");
-            entity.Property(e => e.IdphongChieuPhim).HasColumnName("IDphongChieuPhim");
+            entity.Property(e => e.HangGhe)
+                .HasMaxLength(10)
+                .IsFixedLength();
+            entity.Property(e => e.IdrapChieuPhim).HasColumnName("IDRapChieuPhim");
+            entity.Property(e => e.TenGhe).HasMaxLength(50);
+            entity.Property(e => e.TenPhongChieu).HasMaxLength(50);
 
-            entity.HasOne(d => d.IdphongChieuPhimNavigation).WithMany(p => p.TGhes)
-                .HasForeignKey(d => d.IdphongChieuPhim)
-                .HasConstraintName("FK_tGhe_tPhongChieu");
+            entity.HasOne(d => d.IdrapChieuPhimNavigation).WithMany(p => p.TGhes)
+                .HasForeignKey(d => d.IdrapChieuPhim)
+                .HasConstraintName("FK_tGhe_tRapChieuPhim");
         });
 
         modelBuilder.Entity<THoaDon>(entity =>
         {
-            entity.HasKey(e => e.IdhoaDon);
-
             entity.ToTable("tHoaDon");
 
-            entity.Property(e => e.IdhoaDon).HasColumnName("IDHoaDon");
-            entity.Property(e => e.IddoVat).HasColumnName("IDDoVat");
-            entity.Property(e => e.Iduser).HasColumnName("IDUser");
-            entity.Property(e => e.Idve).HasColumnName("IDVe");
-            entity.Property(e => e.NgayLap).HasColumnType("datetime");
-            entity.Property(e => e.TrangThai)
-                .HasMaxLength(10)
-                .IsFixedLength();
+            entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+            entity.Property(e => e.IdHoaDon)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.NameFood).HasMaxLength(100);
+            entity.Property(e => e.NameGhe)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
-            entity.HasOne(d => d.IduserNavigation).WithMany(p => p.THoaDons)
-                .HasForeignKey(d => d.Iduser)
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.THoaDons)
+                .HasForeignKey(d => d.IdUser)
                 .HasConstraintName("FK_tHoaDon_tTaiKhoan");
         });
 
@@ -184,7 +217,6 @@ public partial class QldatVeXemPhimContext : DbContext
                 .HasMaxLength(200)
                 .IsUnicode(false)
                 .IsFixedLength();
-            entity.Property(e => e.MoTa).HasMaxLength(255);
             entity.Property(e => e.NgayCongChieu).HasColumnType("datetime");
             entity.Property(e => e.TenPhim).HasMaxLength(255);
             entity.Property(e => e.TheLoai).HasMaxLength(255);
@@ -193,13 +225,12 @@ public partial class QldatVeXemPhimContext : DbContext
 
         modelBuilder.Entity<TPhongChieu>(entity =>
         {
-            entity.HasKey(e => e.IdphongChieu);
+            entity.HasKey(e => e.TenPhongChieu);
 
             entity.ToTable("tPhongChieu");
 
-            entity.Property(e => e.IdphongChieu).HasColumnName("IDphongChieu");
-            entity.Property(e => e.IdrapChieuPhim).HasColumnName("IDRapChieuPhim");
             entity.Property(e => e.TenPhongChieu).HasMaxLength(50);
+            entity.Property(e => e.IdrapChieuPhim).HasColumnName("IDRapChieuPhim");
 
             entity.HasOne(d => d.IdrapChieuPhimNavigation).WithMany(p => p.TPhongChieus)
                 .HasForeignKey(d => d.IdrapChieuPhim)
@@ -224,6 +255,7 @@ public partial class QldatVeXemPhimContext : DbContext
 
             entity.Property(e => e.IdrapChieuPhim).HasColumnName("IDRapChieuPhim");
             entity.Property(e => e.DiaChi).HasMaxLength(255);
+            entity.Property(e => e.Iduser).HasColumnName("IDUser");
             entity.Property(e => e.TenRap).HasMaxLength(255);
         });
 
@@ -237,6 +269,7 @@ public partial class QldatVeXemPhimContext : DbContext
             entity.Property(e => e.GheTrong).HasMaxLength(255);
             entity.Property(e => e.Idphim).HasColumnName("IDPhim");
             entity.Property(e => e.IdrapChieuPhim).HasColumnName("IDRapChieuPhim");
+            entity.Property(e => e.TenPhongChieu).HasMaxLength(50);
             entity.Property(e => e.TgbatDau)
                 .HasColumnType("datetime")
                 .HasColumnName("TGBatDau");
@@ -274,30 +307,22 @@ public partial class QldatVeXemPhimContext : DbContext
 
         modelBuilder.Entity<TThanhToan>(entity =>
         {
-            entity.HasKey(e => new { e.IdthanhToan, e.IdhoaDon });
+            entity.HasKey(e => e.IdthanhToan).HasName("PK_tThanhToan_1");
 
             entity.ToTable("tThanhToan");
 
-            entity.Property(e => e.IdthanhToan)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("IDThanhToan");
-            entity.Property(e => e.IdhoaDon).HasColumnName("IDHoaDon");
-            entity.Property(e => e.NgayThanhToan)
-                .HasMaxLength(10)
-                .IsFixedLength();
+            entity.Property(e => e.IdthanhToan).HasColumnName("IDThanhToan");
+            entity.Property(e => e.EmailKhachHang).HasMaxLength(100);
+            entity.Property(e => e.IdhoaDon)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("IDHoaDon");
+            entity.Property(e => e.NgayDatGhe).HasColumnType("date");
+            entity.Property(e => e.NgayThanhToan).HasColumnType("datetime");
+            entity.Property(e => e.PhoneKhachHang).HasMaxLength(100);
             entity.Property(e => e.Pttt)
-                .HasMaxLength(255)
+                .HasMaxLength(100)
                 .HasColumnName("PTTT");
-
-            entity.HasOne(d => d.IdhoaDonNavigation).WithMany(p => p.TThanhToans)
-                .HasForeignKey(d => d.IdhoaDon)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_tThanhToan_tHoaDon");
-
-            entity.HasOne(d => d.IdthanhToanNavigation).WithMany(p => p.TThanhToans)
-                .HasForeignKey(d => d.IdthanhToan)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_tThanhToan_tVe");
         });
 
         modelBuilder.Entity<TThongTinKhuyenMai>(entity =>
@@ -307,18 +332,22 @@ public partial class QldatVeXemPhimContext : DbContext
             entity.ToTable("tThongTinKhuyenMai");
 
             entity.Property(e => e.IdkhuyenMai).HasColumnName("IDKhuyenMai");
-            entity.Property(e => e.Iduser).HasColumnName("IDUser");
-            entity.Property(e => e.NdkhuyenMai)
-                .HasMaxLength(255)
-                .HasColumnName("NDKhuyenMai");
-            entity.Property(e => e.TenKhuyenMai).HasMaxLength(255);
+            entity.Property(e => e.HinhAnh)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .IsFixedLength();
+            entity.Property(e => e.IdrapChieuPhim).HasColumnName("IDRapChieuPhim");
+            entity.Property(e => e.NdkhuyenMai1).HasColumnName("NDKhuyenMai1");
+            entity.Property(e => e.NdkhuyenMai2).HasColumnName("NDKhuyenMai2");
+            entity.Property(e => e.NdkhuyenMai3).HasColumnName("NDKhuyenMai3");
+            entity.Property(e => e.TenUuDaiVaKhuyenMai).HasMaxLength(255);
             entity.Property(e => e.TimeBegin).HasColumnType("datetime");
             entity.Property(e => e.TimeEnd).HasColumnType("datetime");
 
-            entity.HasOne(d => d.IduserNavigation).WithMany(p => p.TThongTinKhuyenMais)
-                .HasForeignKey(d => d.Iduser)
+            entity.HasOne(d => d.IdrapChieuPhimNavigation).WithMany(p => p.TThongTinKhuyenMais)
+                .HasForeignKey(d => d.IdrapChieuPhim)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_tThongTinKhuyenMai_tTaiKhoan");
+                .HasConstraintName("FK_tThongTinKhuyenMai_tRapChieuPhim");
         });
 
         modelBuilder.Entity<TVe>(entity =>
@@ -342,6 +371,23 @@ public partial class QldatVeXemPhimContext : DbContext
                 .HasForeignKey(d => d.IdsuatChieu)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_tVe_tSuatChieu");
+        });
+        modelBuilder.Entity<TTheoDoi>(entity =>
+        {
+            entity.HasKey(e => e.IdTheoDoi);
+
+            entity.ToTable("TTheoDoi");
+
+            entity.Property(e => e.IdTheoDoi).HasColumnName("IDTheoDoi"); // Specify the column name for the IdTheoDoi property
+
+            entity.Property(e => e.IdUser).HasColumnName("IDUser");
+            entity.Property(e => e.IdPhim).HasColumnName("IDPhim");
+
+            // Define relationships
+            entity.HasOne(d => d.IdtaiKhoanNavigation)
+                  .WithMany(p => p.TTheoDois)
+                  .HasForeignKey(d => d.IdUser)
+                  .HasConstraintName("FK_TTheoDoi_TTaiKhoan");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -7,13 +7,19 @@ public partial class TThanhToan
 {
     public int IdthanhToan { get; set; }
 
-    public int IdhoaDon { get; set; }
+    public string? IdhoaDon { get; set; }
+
+    public int? IdUser { get; set; }
 
     public string? Pttt { get; set; }
 
-    public string? NgayThanhToan { get; set; }
+    public DateTime? NgayThanhToan { get; set; }
 
-    public virtual THoaDon IdhoaDonNavigation { get; set; } = null!;
+    public string? EmailKhachHang { get; set; }
 
-    public virtual TVe IdthanhToanNavigation { get; set; } = null!;
+    public string? PhoneKhachHang { get; set; }
+
+    public DateTime? NgayDatGhe { get; set; }
+
+    /*public int? Gia {  get; set; }*/
 }

@@ -1,0 +1,147 @@
+﻿@model DatVeXemPhim2023.ViewModels.ListClass
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!-- Mobile Specific Metas-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="telephone=no" name="format-detection">
+
+<!-- Fonts -->
+<!-- Font awesome - icon font -->
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<!-- Roboto -->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+
+<!-- Stylesheets -->
+<!-- jQuery UI -->
+<link href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+
+<!-- Mobile menu -->
+<link href="~/LayoutDatVe/css/gozha-nav.css" rel="stylesheet" />
+<!-- Select -->
+<link href="~/LayoutDatVe/css/external/jquery.selectbox.css" rel="stylesheet" />
+<!-- Swiper slider -->
+<link href="~/LayoutDatVe/css/external/idangerous.swiper.css" rel="stylesheet" />
+
+<!-- Custom -->
+<link href="~/LayoutDatVe/css/style.css?v=1" rel="stylesheet" />
+
+<!-- Modernizr -->
+<script src="~/LayoutDatVe/js/external/modernizr.custom.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+<![endif]-->
+<!-- Main content -->
+
+
+<section class="food-and-drinks">
+    <div class="container">
+        <h2>Mua đồ ăn và đồ uống</h2>
+
+        <!-- Food and drinks selection -->
+        <style>
+            .food-image {
+                max-width: 100%; /* Đặt chiều rộng tối đa là 100% của container cha */
+                height: auto; /* Giữ tỉ lệ khung hình khi thay đổi kích thước */
+                display: block; /* Loại bỏ khoảng trắng dưới hình ảnh khi được hiển thị làm khối */
+                margin: 0 auto; /* Căn giữa hình ảnh bên trong container */
+                max-width: 500px;
+            }
+        </style>
+
+                
+        <div class="food-drinks-selection">
+            @foreach (var item in Model.LdoUongs)
+            {
+                <div class="food-item">
+                    <img class="food-image" src="~/LayoutDatVe/img/quangcao/@item.HinhAnh" alt="Food 1">
+                    <h3>@item.TenDoUong</h3>
+                    <p>giá: @item.Gia</p>
+                    <button class="btn btn-primary" onclick="addToCart('@item?.TenDoUong', @item?.Gia, @item?.IddoUong)">Thêm vào giỏ hàng</button>
+                </div>
+            }
+
+            @foreach (var item in Model.LdoAns)
+            {
+                <div class="food-item">
+                    <img class="food-image" src="~/LayoutDatVe/img/quangcao/@item.HinhAnh" alt="Food 1">
+                    <h3>@item.Ten</h3>
+                    <p>giá: @item.Gia</p>
+                    <button class="btn btn-primary" onclick="addToCart('@item?.Ten', @item?.Gia, @item?.IddoAn)">Thêm vào giỏ hàng</button>
+                </div>
+            }
+
+            @foreach (var item in Model.LcomBos)
+            {
+                <div class="food-item">
+                    <img class="food-image" src="~/LayoutDatVe/img/quangcao/@item.HinhAnh" alt="Food 1">
+                    <h3>@item.TenCombo</h3>
+                    <p>giá: @item.Gia</p>
+                    <button class="btn btn-primary" onclick="addToCart('@item?.TenCombo', @item?.Gia, @item?.IdcomBo)">Thêm vào giỏ hàng</button>
+                </div>
+            }
+
+            
+
+            <!-- Add more food items as needed -->
+            <!-- Shopping cart -->
+            <div class="shopping-cart">
+                <h2>Giỏ hàng</h2>
+                <ul id="cart-items">
+                    <!-- Cart items will be dynamically added here -->
+                </ul>
+                <p>Tổng cộng: <span id="total-cost">0 VND</span></p>
+                @* <button class="btn btn-success" onclick="checkout()">Thanh toán</button> *@
+            </div>
+        </div>
+    </div>
+</section>
+<form id='film-and-time' class="booking-form" method='get' action='DatChoNgoi'>
+    <input type='text' name='choosen-cost' class="choosen-cost">
+    <input type='text' name='choosen-sits' class="choosen-sits">
+
+    <div class="booking-pagination booking-pagination--margin">
+        <a asp-controller="home" asp-action="datchongoi" asp-route-IdPhim="@Model.phims.Idphim" class="booking-pagination__prev">
+            <span class="arrow__text arrow--prev">bước trước</span>
+            <span class="arrow__info">Ở Đâu&amp;Khi nào</span>
+        </a>
+        <a asp-controller="home" asp-action="checkhoadon" asp-route-IdPhim="@Model.phims.Idphim" class="booking-pagination__next">
+            <span class="arrow__text arrow--next">bước tiếp theo</span>
+            <span class="arrow__info">Mua Đồ ăn, nước uống</span>
+        </a>
+    </div>
+</form>
+
+
+
+
+
+
+<!-- JavaScript-->
+<!-- jQuery 1.9.1-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/external/jquery-1.10.1.min.js"><\/script>')</script>
+<!-- Migrate -->
+<script src="~/LayoutDatVe/js/external/jquery-migrate-1.2.1.min.js"></script>
+<!-- jQuery UI -->
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<!-- Bootstrap 3-->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+<!-- Mobile menu -->
+<script src="~/LayoutDatVe/js/jquery.mobile.menu.js"></script>
+<!-- Select -->
+<script src="~/LayoutDatVe/js/external/jquery.selectbox-0.2.min.js"></script>
+<!-- Swiper slider -->
+<script src="~/LayoutDatVe/js/external/idangerous.swiper.min.js"></script>
+
+<!-- Form element -->
+<script src="~/LayoutDatVe/js/external/form-element.js"></script>
+<!-- Form validation -->
+<script src="~/LayoutDatVe/js/form.js"></script>
+
+<!-- Custom -->
+<script src="~/LayoutDatVe/js/custom.js"></script>
+<script src="~/LayoutDatVe/js/muaHang.js"></script>

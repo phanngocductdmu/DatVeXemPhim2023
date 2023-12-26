@@ -1,0 +1,195 @@
+﻿@model DatVeXemPhim2023.ViewModels.ListClass
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+<!-- Mobile Specific Metas-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="telephone=no" name="format-detection">
+
+<!-- Fonts -->
+<!-- Font awesome - icon font -->
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<!-- Roboto -->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+
+<!-- Stylesheets -->
+<!-- jQuery UI -->
+<link href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+
+<!-- Mobile menu -->
+<link href="~/LayoutDatVe/css/gozha-nav.css" rel="stylesheet" />
+<!-- Select -->
+<link href="~/LayoutDatVe/css/external/jquery.selectbox.css" rel="stylesheet" />
+<!-- Swiper slider -->
+<link href="~/LayoutDatVe/css/external/idangerous.swiper.css" rel="stylesheet" />
+
+<!-- Custom -->
+<link href="~/LayoutDatVe/css/style.css?v=1" rel="stylesheet" />
+
+<!-- Modernizr -->
+<script src="~/LayoutDatVe/js/external/modernizr.custom.js"></script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+<![endif]-->
+<!-- Main content -->
+
+<section class="container">
+    <div class="order-container">
+        <div class="order">
+            <img class="order__images" alt='' src="~/LayoutDatVe/img/tickets.png">
+            <p class="order__title">Đặt vé <br><span class="order__descript">và chúc bạn có thời gian xem phim vui vẻ</span></p>
+        </div>
+    </div>
+
+    <div class="order-step-area">
+        <div class="order-step first--step">1.Ở đâu &amp; Khi nào</div>
+    </div>
+
+    <h2 class="page-heading">Thành phố &amp; Ngày</h2>
+
+    <div class="choose-container choose-container--short">
+        <form id='select' class="select" method='get'>
+            <select name="select_item" id="select-sort" class="select__sort" tabindex="0">
+                @foreach (var item in Model.LRapPhim)
+                {
+                    <li><a asp-controller="home" asp-action="datvetheorap" asp-route-IdPhim="@Model.phims.Idphim" asp-route-IdRapPhim="@item.IdrapChieuPhim">
+                    <option value="@item.DiaChi">@item.DiaChi</option>
+                    </a></li>
+                }
+            </select>
+        </form>
+        <div class="datepicker">
+            <span class="datepicker__marker"><i class="fa fa-calendar"></i>Date</span>
+            <input type="text" id="datepicker" class="datepicker__input">
+        </div>
+    </div>
+    <h2 class="page-heading">Chọn thời gian</h2>
+
+    <div class="time-select time-select--wide">
+        @foreach (var item in Model.LRapPhim.Where(x => x.IdrapChieuPhim == ViewBag.IdRapPhim))
+        {
+            <div class="time-select__group">
+                <div class="col-sm-3">
+
+                    <p class="time-select__place">@item.TenRap</p>
+
+                </div>
+                <ul class="col-sm-6 items-wrap">
+                    @foreach (var phim in Model.LsuatChieus.Where(x => x.IdrapChieuPhim == item.IdrapChieuPhim))
+                    {
+                        <li class="time-select__item selectable-time" data-time="@phim.TgbatDau">@phim.TgbatDau</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    <div class="choose-indector choose-indector--time">
+        <strong>Đã chọn: </strong><span class="choosen-area"></span>
+    </div>
+</section>
+
+<div class="clearfix"></div>
+<form id='film-and-time' class="booking-form" method='get' action='book2.html'>
+    <input type='text' name='choosen-movie' class="choosen-movie">
+
+    <input type='text' name='choosen-city' class="choosen-city">
+    <input type='text' name='choosen-date' class="choosen-date">
+
+    <input type='text' name='choosen-cinema' class="choosen-cinema">
+    <input type='text' name='choosen-time' class="choosen-time">
+
+
+    <div class="booking-pagination">
+        <a href="#" class="booking-pagination__prev hide--arrow">
+            <span class="arrow__text arrow--prev"></span>
+            <span class="arrow__info"></span>
+        </a>
+        <a asp-controller="home" asp-action="datchongoi" asp-route-IdPhim="@Model.phims.Idphim" class="booking-pagination__next disabled">
+            <span class="arrow__text arrow--next">Bước tiếp theo</span>
+            <span class="arrow__info">chọn chỗ ngồi</span>
+        </a>
+    </div>
+
+</form>
+<h2 class="page-heading heading--outcontainer">Phim khác</h2>
+</section>
+
+<div class="choose-film">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!--First Slide-->
+            @foreach (var item in Model.Lphims)
+            {
+                <div class="swiper-slide" data-film='@item.TenPhim'>
+                    <div class="film-images">
+                        <img alt='' src="~/LayoutDatVe/phim/@item.HinhAnh">
+                    </div>
+                    <p class="choose-film__title">@item.TenPhim</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<section class="container">
+    <div class="col-sm-12">
+        <div class="choose-indector choose-indector--film">
+            <strong>Tên Phim: </strong><span class="choosen-area"></span>
+        </div>
+        <div class="clearfix"></div>
+
+        <!-- JavaScript-->
+        <!-- jQuery 1.9.1-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/external/jquery-1.10.1.min.js"><\/script>')</script>
+        <!-- Migrate -->
+        <script src="~/LayoutDatVe/js/external/jquery-migrate-1.2.1.min.js"></script>
+        <!-- jQuery UI -->
+        <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <!-- Bootstrap 3-->
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
+        <!-- Mobile menu -->
+        <script src="~/LayoutDatVe/js/jquery.mobile.menu.js"></script>
+        <!-- Select -->
+        <script src="~/LayoutDatVe/js/external/jquery.selectbox-0.2.min.js"></script>
+        <!-- Swiper slider -->
+        <script src="~/LayoutDatVe/js/external/idangerous.swiper.min.js"></script>
+
+        <!-- Form element -->
+        <script src="~/LayoutDatVe/js/external/form-element.js"></script>
+        <!-- Form validation -->
+        <script src="~/LayoutDatVe/js/form.js"></script>
+
+        <!-- Custom -->
+        <script src="~/LayoutDatVe/js/custom.js"></script>
+
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                init_BookingOne();
+            });
+        </script>
+
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                var currentDate = new Date();
+                var formattedDate = ("0" + (currentDate.getMonth() + 1)).slice(-2) + "/" + ("0" + currentDate.getDate()).slice(-2) + "/" + currentDate.getFullYear();
+                $("#datepicker").val(formattedDate);
+                $("#datepicker").datepicker({
+                    dateFormat: 'mm/dd/yy',
+                    minDate: 0,
+                    numberOfMonths: 2,
+                    maxDate: 0,
+                    onSelect: function (selectedDate) {
+                        console.log("Selected date: " + selectedDate);
+                    }
+                });
+            });
+        </script>

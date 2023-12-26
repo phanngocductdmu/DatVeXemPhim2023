@@ -1,0 +1,81 @@
+﻿@model TThongTinKhuyenMai
+<style>
+    .breadcrumbs ul li:nth-child(2) {
+        display: none;
+    }
+
+    .col-left-detail-content-new-offer {
+        float: left;
+        margin-right: 20px;
+    }
+
+    .col-right-detail-content-new-offer {
+        overflow: hidden;
+    }
+
+        .col-right-detail-content-new-offer img {
+            max-width: 100%;
+            height: auto;
+        }
+
+    p {
+        font-size: 18px; /* You can adjust the size according to your preference */
+    }
+</style>
+
+
+<div class="main">
+    <div class="col-main">
+        <div id="messages_product_view"></div>
+        <div class="postWrapper">
+            <div class="postTitle">
+                <h2>@Model.TenUuDaiVaKhuyenMai</h2>
+            </div>
+            <div class="postContent">
+                <div class="detail-content-new-offer" style="text-align: justify;">
+                    <div class="col-left-detail-content-new-offer"><img src="https://www.cgv.vn/media/wysiwyg/2023/122023/350_X_495_8_.png"></div>
+                    <div class="col-right-detail-content-new-offer">
+                        <div class="social-daetail-content-new-offer">
+                            <div class="fb-like" data-href="" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false">
+                                <p><strong>@Model.NdkhuyenMai1</strong></p>
+                                <p>
+                                    @{
+                                        var indexOfColon1 = Model.NdkhuyenMai1?.IndexOf(":") ?? -1;
+                                        var boldText1 = indexOfColon1 >= 0 ? "font-weight-bold" : "";
+                                    }
+
+                                    @Html.Raw($"<strong class='{boldText1}'>{Model.NdkhuyenMai1?.Substring(0, indexOfColon1 + 1)}</strong>{Model.NdkhuyenMai1?.Substring(indexOfColon1 + 1)}<br>")
+                                </p>
+                                <p>
+                                    @{
+                                        var indexOfColon2 = Model.NdkhuyenMai2?.IndexOf(":") ?? -1;
+                                        var boldText2 = indexOfColon2 >= 0 ? "font-weight-bold" : "";
+                                    }
+
+                                    @Html.Raw($"<strong class='{boldText2}'>{Model.NdkhuyenMai2?.Substring(0, indexOfColon2 + 1)}</strong>{Model.NdkhuyenMai2?.Substring(indexOfColon2 + 1)}<br>")
+                                </p>
+                                <p>
+                                    @{
+                                        var indexOfColon3 = Model.NdkhuyenMai3?.IndexOf(":") ?? -1;
+                                        var boldText3 = indexOfColon3 >= 0 ? "font-weight-bold" : "";
+                                    }
+
+                                    @Html.Raw($"<strong class='{boldText3}'>{Model.NdkhuyenMai3?.Substring(0, indexOfColon3 + 1)}</strong>{Model.NdkhuyenMai3?.Substring(indexOfColon3 + 1)}<br>")
+                                </p>
+                                <p>
+                                    Bộ phận Chăm sóc khách hàng Hotline: 1900 6017 Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày bao gồm cả Lễ Tết)
+                                    Email hỗ trợ: hoidap@cgv.vn
+                                </p>
+                                <h3><a asp-controller="home" asp-action="index">>>Chọn Phim Ngay</a></h3>
+                                <p style="font; color: red;">Tải app CGV để đặt vé chọn chỗ sớm hơn, nhanh hơn:</p>
+                                <p style="color: red;">Tải CGV Cinemas cho iOS</p>
+                                <p style="color: red;">Tải CGV Cinemas cho Android</p>
+                                <p style="text-align: center;"><strong>&nbsp;</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
+</div>

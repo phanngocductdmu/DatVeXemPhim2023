@@ -7,9 +7,13 @@ public partial class TComBo
 {
     public int IdcomBo { get; set; }
 
+    public int? IdRapChieuPhim { get; set; }
+
     public string? TenCombo { get; set; }
 
     public int? Gia { get; set; }
+
+    public string? HinhAnh { get; set; }
 
     public virtual ICollection<TDoVat> TDoVats { get; set; } = new List<TDoVat>();
 }

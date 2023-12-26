@@ -7,9 +7,13 @@ public partial class TDoUong
 {
     public int IddoUong { get; set; }
 
+    public int? IdRapChieuPhim { get; set; }
+
     public string? TenDoUong { get; set; }
 
     public int? Gia { get; set; }
+
+    public string? HinhAnh { get; set; }
 
     public virtual ICollection<TDoVat> TDoVats { get; set; } = new List<TDoVat>();
 }

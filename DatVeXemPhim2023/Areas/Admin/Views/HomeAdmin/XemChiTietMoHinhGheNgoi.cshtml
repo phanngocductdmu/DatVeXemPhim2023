@@ -1,0 +1,445 @@
+﻿@using DatVeXemPhim2023.Models;
+@model List<TGhe>;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "XemChiTietChoNgoi";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .choose-sits {
+        text-align: center;
+        margin-top: 70px;
+    }
+
+        .choose-sits .choose-sits__info {
+            display: inline-block;
+            font-size: 13px;
+            padding: 10px 20px 0 40px;
+            margin-bottom: 52px;
+        }
+
+            .choose-sits .choose-sits__info .sits-price {
+                position: relative;
+                display: inline-block;
+                padding: 0 22px;
+            }
+
+                .choose-sits .choose-sits__info .sits-price:before {
+                    content: '';
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    top: 5px;
+                    left: 0;
+                }
+
+            .choose-sits .choose-sits__info .marker--none:before {
+                display: none;
+            }
+
+            .choose-sits .choose-sits__info .sits-state {
+                position: relative;
+                display: inline-block;
+                padding: 0 25px;
+            }
+
+                .choose-sits .choose-sits__info .sits-state:before {
+                    content: '';
+                    width: 10px;
+                    height: 10px;
+                    position: absolute;
+                    top: 5px;
+                    left: 0;
+                }
+
+    .sits-anchor {
+        position: relative;
+        color: #969b9f;
+        font-size: 13px;
+    }
+
+        .sits-anchor:before {
+            content: '';
+            background-color: #969b9f;
+            width: 380px;
+            height: 5px;
+            position: absolute;
+            bottom: -9px;
+            left: 50%;
+            margin-left: -190px;
+        }
+
+    .sits {
+        position: relative;
+        margin-top: 35px;
+    }
+
+        .sits .sits__indecator {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            border: 1px solid #4c4145;
+            font-size: 13px;
+            padding-top: 5px;
+        }
+
+        .sits .sits__line {
+            width: 30px;
+            position: absolute;
+            top: -1px;
+            left: 0;
+        }
+
+        .sits .sits__number {
+            margin-top: 60px;
+            font-size: 0;
+        }
+
+
+        .sits .sits__row {
+            font-size: 0;
+        }
+
+            .sits .sits__row .sits__place {
+                position: relative;
+                margin: 5px;
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+                line-height: 30px;
+                font-size: 10px;
+                color: #FF99FF;
+                font-weight: bold;
+                z-index: 13;
+                text-indent: 0;
+                background-color: #4c4145;
+            }
+
+                .sits .sits__row .sits__place:before {
+                    content: '';
+                    width: 30px;
+                    height: 30px;
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    z-index: -1;
+                }
+
+                .sits .sits__row .sits__place:hover {
+                    cursor: pointer;
+                }
+
+                    .sits .sits__row .sits__place:hover:before {
+                        background-color: #4c4145;
+                    }
+
+
+
+            .sits .sits__row .sits-state--not:hover {
+                text-indent: -9999px;
+                cursor: auto;
+            }
+
+                .sits .sits__row .sits-state--not:hover:before {
+                    background-color: #dbdee1;
+                }
+
+            .sits .sits__row .sits-state--your {
+                text-indent: -9999px;
+            }
+
+                .sits .sits__row .sits-state--your:after {
+                    content: "\f00c";
+                    font: 13px "FontAwesome";
+                    color: #ffffff;
+                    position: absolute;
+                    top: 7px;
+                    left: 9px;
+                    z-index: 15;
+                    text-indent: 0px;
+                }
+
+                .sits .sits__row .sits-state--your:hover {
+                    text-indent: -9999px;
+                }
+
+                    .sits .sits__row .sits-state--your:hover:after {
+                        content: "\f00d";
+                        left: 10px;
+                    }
+
+    .additional-margin {
+        margin-top: 20px;
+    }
+
+    .sits__line .additional-margin {
+        margin-top: 25px;
+    }
+
+    .sits-area--mobile {
+        text-align: left;
+        margin-top: 20px;
+    }
+
+        .sits-area--mobile img {
+            max-width: 100%;
+        }
+
+        .sits-area--mobile .sbHolder {
+            display: block;
+            float: left;
+            margin-right: 15px;
+            width: 140px;
+            height: 35px;
+            border: 1px solid #DBDEE1;
+            background-color: #fff;
+        }
+
+            .sits-area--mobile .sbHolder .sbSelector {
+                margin-top: 4px;
+                margin-left: 5px;
+                color: #4c4145;
+                font-size: 13px;
+            }
+
+            .sits-area--mobile .sbHolder .sbOptions {
+                width: 140px;
+                top: 37px !important;
+                border: none;
+                padding: 14px 7px;
+                z-index: 23;
+                background-color: #4c4145;
+                -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);
+                -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);
+            }
+
+                .sits-area--mobile .sbHolder .sbOptions a {
+                    color: #b4b1b2;
+                    border: none;
+                }
+
+                    .sits-area--mobile .sbHolder .sbOptions a:hover,
+                    .sits-area--mobile .sbHolder .sbOptions a:focus {
+                        color: #ffffff;
+                    }
+
+            .sits-area--mobile .sbHolder .sbToggle {
+                top: 10px;
+                right: -2px;
+            }
+
+                .sits-area--mobile .sbHolder .sbToggle:before {
+                    content: "\f078";
+                    color: #4c4145;
+                    font-family: "FontAwesome";
+                    font-size: 12px;
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                }
+
+            .sits-area--mobile .sbHolder .sbToggleOpen:before {
+                content: "\f077";
+            }
+
+        .sits-area--mobile .sits-select {
+            margin-bottom: 20px;
+        }
+
+        .sits-area--mobile .watchlist {
+            margin-top: 2px;
+            display: block;
+            margin: 20px 0;
+            width: 120px;
+        }
+
+        .sits-area--mobile .sits__checked {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background-color: #4c4145;
+            margin-top: 0px;
+            padding: 0px 50px;
+        }
+</style>
+
+<div>
+    <a asp-action="DanhMucGhe" asp-route-IdPhong="@ViewBag.IdPhong">Quay Lại</a>
+</div>
+
+<div class="choose-sits">
+    <div class="col-sm-12 col-lg-10 col-lg-offset-1">
+        <div class="sits-area hidden-xs">
+            <div class="sits-anchor">Màn Hình</div>
+
+            <div class="sits">
+                <aside class="sits__line">
+                    <span class="sits__indecator">A</span>
+                    <span class="sits__indecator">B</span>
+                    <span class="sits__indecator">C</span>
+                    <span class="sits__indecator">D</span>
+                    <span class="sits__indecator">E</span>
+                    <span class="sits__indecator">F</span>
+                    <span class="sits__indecator">G</span>
+                    <span class="sits__indecator">I</span>
+                    <span class="sits__indecator additional-margin">J</span>
+                    <span class="sits__indecator">K</span>
+                    <span class="sits__indecator">L</span>
+                </aside>
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "A")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "B")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "C")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "D")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "E")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "F")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "G")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "I")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "J")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "K")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+
+                <div class="sits__row">
+                    @foreach (var item in Model)
+                    {
+                        if (item.HangGhe?.Trim() == "L")
+                        {
+
+                            <span class="sits__place sits-price--cheap" data-place='@item.TenGhe'>@item.TenGhe</span>
+
+                        }
+                    }
+                </div>
+                <footer class="sits__number">
+                    <span class="sits__indecator">1</span>
+                    <span class="sits__indecator">2</span>
+                    <span class="sits__indecator">3</span>
+                    <span class="sits__indecator">4</span>
+                    <span class="sits__indecator">5</span>
+                    <span class="sits__indecator">6</span>
+                    <span class="sits__indecator">7</span>
+                    <span class="sits__indecator">8</span>
+                    <span class="sits__indecator">9</span>
+                    <span class="sits__indecator">10</span>
+                    <span class="sits__indecator">11</span>
+                    <span class="sits__indecator">12</span>
+                    <span class="sits__indecator">13</span>
+                    <span class="sits__indecator">14</span>
+                    <span class="sits__indecator">15</span>
+                    <span class="sits__indecator">16</span>
+                    <span class="sits__indecator">17</span>
+                    <span class="sits__indecator">18</span>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>

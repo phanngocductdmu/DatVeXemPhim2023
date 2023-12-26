@@ -1,0 +1,54 @@
+﻿@using DatVeXemPhim2023.Models;
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<TPhongChieu>
+
+@{
+    ViewData["Title"] = "PhongXemPhim";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<h3>Quản Li Phòng Rạp</h3>
+<p>@TempData["Message"]</p>
+<p>
+    <a asp-action="ThemPhong" asp-route-IdUser="@ViewBag.IdUser">Tạo Mới Phòng</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tên Phòng Chiếu
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            string @cls = "table-primary";
+        }
+        @foreach (var item in Model)
+        {
+            i = i + 1;
+            cls = "table-primary";
+            if (i % 2 == 0)
+            {
+                cls = "table-success";
+            }
+            <tr class="@cls">
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenPhongChieu)
+                </td>
+                <td>
+                    <a asp-action="SuaPhong" asp-route-IdPhong="@item.TenPhongChieu">Chỉnh sữa phòng</a> |
+                    <a asp-action="Details" asp-route-IdPhong="@item.TenPhongChieu">Details</a> |
+                    <a asp-action="DanhMucGhe" asp-route-IdPhong="@item.TenPhongChieu" asp-route-IdRapChieu="@ViewBag.DiaChiRap">Danh Sách Ghế</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model,page => Url.Action("phongxemphim", new{page=page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+    LiElementClasses = new List<String> {"page-item"},
+    PageClasses = new List<String> {"page-link"}
+})

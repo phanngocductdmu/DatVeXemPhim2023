@@ -1,0 +1,48 @@
+﻿@model DatVeXemPhim2023.Models.TSuatChieu
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "ThemMoiSuatChieu";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+    <h1>Them Moi Suat Chieu</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-area="admin" asp-controller="suatchieuadmin" asp-action="ThemMoiSuatChieu" asp-route-IdUser="@ViewBag.IdUser" asp-route-IdPhim="@ViewBag.IdPhim">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenPhongChieu" class="control-label"></label>
+                <select asp-for="TenPhongChieu" asp-items="ViewBag.DanhSachPhongChieu" class="form-control"></select>
+                <span asp-validation-for="TenPhongChieu" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="display:none;">
+                <label asp-for="IdrapChieuPhim" class="control-label"></label>
+                <input asp-for="IdrapChieuPhim" class="form-control" type="hidden" />
+                <span asp-validation-for="IdrapChieuPhim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="IdphimNavigation" type="hidden" value="@ViewBag.IdPhim" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TgbatDau" class="control-label"></label>
+                <input asp-for="TgbatDau" class="form-control" />
+                <span asp-validation-for="TgbatDau" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TgketThuc" class="control-label"></label>
+                <input asp-for="TgketThuc" class="form-control" />
+                <span asp-validation-for="TgketThuc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-area="admin" asp-controller="suatchieuadmin" asp-action="DanhSachSuatChieu" asp-route-IdUser="@ViewBag.IdUser" asp-route-IdPhim="@ViewBag.IdPhim">Quay Lại Danh Sách</a>
+</div>
+

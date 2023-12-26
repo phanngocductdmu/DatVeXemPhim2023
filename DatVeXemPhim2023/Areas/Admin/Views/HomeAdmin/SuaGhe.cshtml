@@ -1,0 +1,51 @@
+﻿@model DatVeXemPhim2023.Models.TGhe
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "SuaSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Sữa Ghế</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="SuaGhe" asp-route-IdPhong="@ViewBag.IdPhong">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Idghe" />
+            <div class="form-group">
+                <label asp-for="HangGhe" class="control-label"></label>
+                <input asp-for="HangGhe" class="form-control" />
+                <span asp-validation-for="HangGhe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenPhongChieu" class="control-label"></label>
+                <select asp-for="TenPhongChieu" asp-items="ViewBag.DanhSachPhongChieu" class="form-control"></select>
+                <span asp-validation-for="TenPhongChieu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenGhe" class="control-label"></label>
+                <input asp-for="TenGhe" class="form-control" />
+                <span asp-validation-for="TenGhe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrangThai" class="control-label"></label>
+                <input asp-for="TrangThai" class="form-control" />
+                <span asp-validation-for="TrangThai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaGhe" class="control-label"></label>
+                <input asp-for="GiaGhe" class="form-control" />
+                <span asp-validation-for="GiaGhe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="DanhMucGhe">Quay Lại Danh Sách</a>
+</div>
+

@@ -1,0 +1,23 @@
+﻿@model List<TPhim>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card movie-item" style="width:300px">
+                <img class="card-img-top img-movie" src="~/LayoutDatVe/phim/@item.HinhAnh" alt="Card image" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title"></h4>
+                    <p class="card-text"></p>
+                    <h5>@item.TenPhim</h5>
+                    <div class="btn-group" role="group" aria-label="Movie actions">
+                        <a asp-controller="home" asp-action="chitietphim" asp-route-IdPhim="@item.Idphim" class="btn btn-outline-warning">Chi tiết</a>
+                        <a asp-controller="datve" asp-action="datve" asp-route-IdPhim="@item.Idphim" class="btn btn-outline-danger btn-buy-ticket-not-signed-in">Mua vé</a>
+                        <a asp-controller="home" asp-action="XoaTheoDoi" asp-route-IdPhim="@item.Idphim" class="btn btn-outline-info btn-follow">Xóa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

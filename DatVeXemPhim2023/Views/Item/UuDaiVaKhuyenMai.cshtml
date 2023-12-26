@@ -1,0 +1,67 @@
+﻿@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<TThongTinKhuyenMai>
+
+<style>
+    .products-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .item {
+        width: 31%; /* Adjust the width as needed */
+        margin-bottom: 20px;
+    }
+
+    .product-poster {
+        /* Your existing styles for the product-poster class */
+    }
+
+    /* Add any additional styles you need for other elements */
+</style>
+<ul class="cate-new-offer products-grid products-grid--max-4-col first last odd">
+    @foreach(var item in Model)
+    {
+        if (item.HinhAnh != null)
+        {
+            <li class="item last">
+                <div class="product-poster" onclick="news(this);">
+                    <div class="fun-new-offer">
+                        <div class="content-new-offer">
+                            <div class="colum-left-new-offer">
+                                <div class="poster-small-new-offer">
+                                    <a asp-controller="Item" asp-action="ChiTietKhuyenMai" asp-route-IdKhuyenMai="@item.IdkhuyenMai">
+                                    <img src="~/LayoutDatVe/UuDaiVaKhuyenMai/@item.HinhAnh">
+                                    </a>
+                                    <div class="colum-right-new-offer">
+                                        <div class="format-new-offer release-day-new-offer">
+                                            <h3>&nbsp;</h3>
+                                            @if (item.TimeBegin.HasValue)
+                                            {
+                                                DateTime timeBegin = item.TimeBegin.Value;
+                                                <h4>@timeBegin.ToString("dd/MM/yyyy HH:mm:ss")</h4>
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    <h5>No TimeBegin available</h5>
+                                                </p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="gtx-trans" style="position: absolute; left: 56px; top: 226.984px;">
+                        <div class="gtx-trans-icon"></div>
+                    </div><a class="aw-blog-read-more" asp-controller="Item" asp-action="ChiTietKhuyenMai" asp-route-IdKhuyenMai="@item.IdkhuyenMai"><h4>Chi Tiết</h4></a>
+                </div>
+            </li>
+        }
+    }
+</ul>
+@Html.PagedListPager(Model,page => Url.Action("index", new{page=page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+    LiElementClasses = new List<String> {"page-item"},
+    PageClasses = new List<String> {"page-link"}
+    })
